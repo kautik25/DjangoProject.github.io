@@ -1,0 +1,74 @@
+{% extends 'app/wallet_page.html' %}
+{% load static %}
+
+{% block card %}
+
+<!--================Blog Area =================-->
+<article class="blog_item" >
+    <div class="blog_item_img">
+        <img class="card-img rounded-0" src="{% static 'img/banner/profile_banner2.png' %}" alt="">
+        <a href="#" class="blog_item_date">
+            <h3><div class="icon"><i class="fa fa-credit-card" aria-hidden="true"></i></div></h3>
+
+        </a>
+    </div>
+    <div class="blog_details">
+        <h2>Update Card</h2><hr>
+        <form action="{{ card.get_update_url }}" method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        {% for field in form %}
+                            {% for error_msg in field.errors %}
+                                <li>{{ error_msg|escape }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error_msg in form.non_field_errors %}
+                            <li>{{ error_msg|escape }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <ul class="list cat-list">
+                <li><b style="color: black">Card Type:</b>&emsp;{{ card.card_type}} card</li><hr>
+                <li><b style="color: black">Card Number:</b>&emsp;{{ card.card_number}}</li>
+            </ul>
+
+            <hr><br>
+            <b>Update Information</b>
+            <div class="input-group-icon mt-10">
+                <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                <input type="text" class="single-input" name="{{ form.owner_first_name.html_name }}"
+                       id="{{ form.owner_first_name.id_for_label }}" value="{{ card.owner_first_name }}"
+                       placeholder="Card Holder First Name" required>
+            </div>
+            <div class="input-group-icon mt-10">
+                <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                <input type="text" class="single-input" name="{{ form.owner_last_name.html_name }}"
+                       id="{{ form.owner_last_name.id_for_label }}" value="{{ card.owner_last_name }}"
+                       placeholder="Card Holder Last Name" required>
+            </div>
+            <div class="input-group-icon mt-10">
+                <div class="icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                <input class="single-input" name="{{ form.expiration_date.html_name }}"
+                       id="{{ form.expiration_date.id_for_label }}" type="date"
+                       value="{{ form.expiration_date.value|date:'Y-m-d'}}"
+                       placeholder="Expiration Date" required>
+            </div>
+
+            <br>
+            <div class="input-group-icon mt-10">
+                <button class="button rounded-0 btn btn-outline-primary" type="submit">Update</button> &nbsp;
+                &nbsp;&nbsp;
+                <a href="{{ card.get_absolute_url }}">
+                    <button class="btn rounded-0 btn-outline-primary">Cancel</button>
+                </a>
+            </div>
+
+
+        </form>
+    </div>
+</article>
+    <!--================Blog Area =================-->
+{% endblock %}

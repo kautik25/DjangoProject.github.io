@@ -1,0 +1,158 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="nk-block-head-content">
+	<h3 class="nk-block-title page-title">Add Expense</h3>    
+</div>
+
+<form method="POST" action="{% url 'app:add_expense' %}" accept-charset="UTF-8" id="add_expense_form" enctype="multipart/form-data">
+	{% csrf_token %}
+                                        
+	{% if form.errors %}                
+		<p>Please correct the following errors:</p>
+		{% for field in form %}
+			{% for error in field.errors %}
+				<li>{{ error|escape }}</li>
+			{% endfor %}
+		{% endfor %}
+
+		{% for error in form.non_field_errors %}
+			<li> {{ error|escape }}</li>
+		{% endfor %}
+
+		{% for message in messages %}
+			<li> {{ message }}</li>
+		{% endfor %}                
+	{% endif %}
+
+	<div class="box box-solid">
+		<div class="box-body">
+			<div class="row">
+
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="{{ form.business_location.id_for_label }}">Business Location:*</label>
+						<div class="input-group">                        
+							<select class="form-control" required="" name="{{ form.business_location.html_name }}" id="{{ form.business_location.id_for_label }}" tabindex="-1" aria-hidden="true">
+								<option selected="selected" value="">Please Select</option>
+								{% for location in location_queryset %}
+									<option value="{{ location.id }}">{{ location.name }}</option>
+								{% endfor %}
+							</select>                                  
+							{{ form.business_location.errors }}                        
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-4">				
+
+					<div class="form-group">
+						<label for="{{ form.expense_category.id_for_label }}">Expense Category:*</label>
+						<div class="input-group">                        
+							<select class="form-control" required="" name="{{ form.expense_category.html_name }}" id="{{ form.expense_category.id_for_label }}" tabindex="-1" aria-hidden="true">
+								<option selected="selected" value="">Please Select</option>
+								{% for expense_category in expense_category_queryset %}
+									<option value="{{ expense_category.id }}">{{ expense_category.name }}</option>
+								{% endfor %}
+							</select>                                  
+							{{ form.expense_category.errors }}                        
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="{{ form.ref_no.id_for_label }}">Reference No:</label>
+						<input class="form-control" name="{{ form.ref_no.html_name }}" id="{{ form.ref_no.id_for_label }}" type="text">
+						{{ form.ref_no.errors }}
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="{{ form.expense_date.id_for_label }}">Expense Date:*</label>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</span>
+							<input type="datetime-local" class="form-control" required="" type="text" name="{{ form.expense_date.html_name }}" id="{{ form.expense_date.id_for_label }}">
+						</div>
+						{{ form.expense_date.errors }}
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="{{ form.payment_status.id_for_label }}">Payment status:*</label>
+						<div class="input-group">                        
+							<select class="form-control col-md-12 payment_types_dropdown" required="" name="{{ form.payment_status.html_name }}" id="{{ form.payment_status.id_for_label }}" style="width:100%;">
+								<option value="">Please Select</option>                                                                                                     
+								{% for x,y in form.fields.payment_status.choices %}
+									<option value="{{ x }}">{{ y }}</option>
+								{% endfor %}
+							</select>
+							{{ form.payment_status.errors }}
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="{{ form.total_amount.id_for_label }}">Total Amount:</label>
+						<input class="form-control input_number" required="" type="text" value="0" name="{{ form.total_amount.html_name }}" id="{{ form.total_amount.id_for_label }}">
+						{{ form.total_amount.errors }} 
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="{{ form.expense_for.id_for_label }}">Expense for:*</label>
+						<div class="input-group">                        
+							<select class="form-control" required="" name="{{ form.expense_for.html_name }}" id="{{ form.expense_for.id_for_label }}" tabindex="-1" aria-hidden="true">
+								<option selected="selected" value="">Please Select</option>
+								{% for customer in user_queryset %}
+									<option value="{{ customer.id }}">{{ customer.first_name }}</option>
+								{% endfor %}
+							</select>                                  
+							{{ form.expense_for.errors }}                        
+						</div>
+					</div>
+				</div>
+				<!-- <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="document">Attach Document:</label>
+                        <div class="file-input file-input-new">
+<div class="kv-upload-progress hide"><div class="progress">
+    <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+        0%
+     </div>
+</div></div>
+<div class="input-group file-caption-main">
+   <div tabindex="500" class="form-control file-caption  kv-fileinput-caption">
+   <div class="file-caption-name"></div>
+</div>
+
+   <div class="input-group-btn">
+       <button type="button" tabindex="500" title="Clear selected files" class="btn btn-default fileinput-remove fileinput-remove-button"><i class="glyphicon glyphicon-trash"></i>  <span class="hidden-xs">Remove</span></button>
+       <button type="button" tabindex="500" title="Abort ongoing upload" class="btn btn-default hide fileinput-cancel fileinput-cancel-button"><i class="glyphicon glyphicon-ban-circle"></i>  <span class="hidden-xs">Cancel</span></button>
+       
+       <div tabindex="500" class="btn btn-primary btn-file"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;  <span class="hidden-xs">Browse..</span><input id="upload_document" name="document" type="file"></div>
+   </div>
+</div></div>
+                        <p class="help-block">Max File size: 1MB</p>
+                    </div>
+                </div> -->
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="{{ form.expense_note.id_for_label }}">Expense Note</label>
+						<textarea class="form-control" rows="3" cols="50" name="{{ form.expense_note.html_name }}" id="{{ form.expense_note.id_for_label }}"></textarea>
+						{{ form.expense_note.errors }}
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<button type="submit" class="btn btn-primary pull-right">Save</button>
+				</div>
+			</div>
+		</div>
+	</div> <!--box end-->
+
+</form>  
+
+{% endblock content %}

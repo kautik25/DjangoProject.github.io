@@ -1,0 +1,106 @@
+{% extends 'app/base.html' %}
+
+{% block content %}
+    <!-- bradcam_area_start  -->
+    <div class="bradcam_area breadcam_bg bradcam_overlay">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>Activity</h3>
+                        <p><a href="{% url 'app:index' %}">Home /</a> Activity</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- bradcam_area_end  -->
+
+	<!-- Start Align Area -->
+    <section>
+        <div class="whole-wrap">
+            <div class="container box_1170">
+                <div class="section-top-border">
+                    <h2 class="mb-30"><b style="color: black;">Send</b></h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="table-primary">
+                                <th scope="col">Date</th>
+                                <th scope="col">Activity</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Send To</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Is completed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for pay in pay_list %}
+                                <tr>
+                                    <th scope="row">{{ pay.create_date|date:'Y/m/d' }}</th>
+                                    <td>{{ pay.description }}</td>
+                                    <td>{{ pay.category }}</td>
+                                    <td>{{ pay.receiver }}</td>
+                                    <td>{{ pay.amount }}</td>
+                                    <td>{{ pay.is_complete}}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>There are no transactions.</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+	<!-- End Align Area -->
+    <br>
+    <section>
+        <div class="whole-wrap">
+            <div class="container box_1170">
+                <div class="section-top-border">
+                    <h2 class="mb-30"><b style="color: black;">Receive</b></h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="table-warning">
+                                <th scope="col">Date</th>
+                                <th scope="col">Activity</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Receive From</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Is completed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for receive in receive_list %}
+                                <tr>
+                                    <th scope="row">{{ receive.create_date|date:'Y/m/d' }}</th>
+                                    <td>{{ receive.description }}</td>
+                                    <td>{{ receive.category }}</td>
+                                    <td>{{ receive.creator }}</td>
+                                    <td>{{ receive.amount }}</td>
+                                    <td>{{ receive.is_complete }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <th scope="row"></th>
+                                    <td>There are no transactions.</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </section>
+    <br>
+{% endblock %}

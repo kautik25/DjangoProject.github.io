@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>Paybills - Piped Gas</title>
+    <meta name="description" content="Paybills - Piped Gas">
+    <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
+    <link rel="icon" type="image/png" href="{% static "assets/img/favicon.png" %}" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/img/icon/192x192.png" %}">
+    <link rel="stylesheet" href="{% static "assets/css/style.css" %}">
+    <link rel="manifest" href="__manifest.json">
+</head>
+
+<body>
+
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- * loader -->
+
+    <div class="appHeader bg-primary text-light">
+        <div class="left">
+            <a href="{% url 'app:providers' %}" class="headerButton goBack">
+                <ion-icon name="chevron-back-outline" role="img" class="md hydrated" aria-label="chevron back outline"></ion-icon>
+            </a>
+        </div>
+        <div class="pageTitle">Piped GAS </div>
+        <div class="right">
+        </div>
+    </div>
+
+    <!-- App Capsule -->
+    <div id="appCapsule">
+        <div class="top-logo">
+            <img src="{% static "assets/img/logo.png" %}">
+        </div>
+        <div class="register-bg">
+            <img src="{% static "assets/img/register-bg.png" %}">
+        </div>
+        <div class="register-box">
+            <h1>
+                Piped GAS
+            </h1>
+            <div class="upi-box">
+                <div class="form-group">
+                    <label>
+                        Provider
+                    </label>
+                    <select class="form-control custom-select">
+                        <option selected disabled value="">Choose...</option>
+                        <option value="62" data-select2-id="6">Gujarat Gas Limited
+                        </option><option value="63" data-select2-id="7">INDRAPRASHTA GAS LTD
+                        </option><option value="67" data-select2-id="8">Mahanagar Gas Limited
+                        </option><option value="92" data-select2-id="9">ADANI GAS
+                        </option><option value="120" data-select2-id="10">Haryana City Gas - Kapil Chopra Enterprise
+                        </option><option value="121" data-select2-id="11">SITI ENERGY
+                        </option><option value="122" data-select2-id="12">Tripura Natural Gas
+                        </option><option value="123" data-select2-id="13">SABARMATI GAS LIMITED
+                        </option><option value="135" data-select2-id="14">Unique Central Piped Gases Pvt Ltd (UCPGPL)
+                        </option><option value="136" data-select2-id="15">Vadodara Gas Limited
+                        </option><option value="314" data-select2-id="16">Gail India Limited
+                        </option><option value="315" data-select2-id="17">Naveriya Gas Pvt Ltd
+                        </option><option value="316" data-select2-id="18">Torrent Gas Moradabad Limited formerly Siti  Energy Limited
+                        </option><option value="317" data-select2-id="19">Green Gas Limited(GGL)
+                        </option><option value="318" data-select2-id="20">Charotar Gas Sahakari Mandali Ltd
+                        </option><option value="319" data-select2-id="21">Aavantika Gas Ltd.
+                        </option><option value="320" data-select2-id="22">Indian Oil-Adani Gas Private Limited
+                        </option><option value="321" data-select2-id="23">IRM Energy Private Limited
+                        </option><option value="322" data-select2-id="24">Maharashtra Natural Gas Limited (MNGL)
+                        </option><option value="323" data-select2-id="25">Sanwariya Gas Limited
+                        </option><option value="324" data-select2-id="26">Bhagyanagar Gas Limited
+                        </option><option value="325" data-select2-id="27">Megha Gas
+                        </option><option value="326" data-select2-id="28">Assam Gas Company Limited
+                        </option><option value="327" data-select2-id="29">Central U.P. Gas Limited
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Customer Mobile Number</label>
+                    <input class="form-control custom-input" placeholder="Customer Mobile Number">
+                </div>
+                <div class="form-group">
+                    <label>Customer ID</label>
+                    <input class="form-control custom-input" placeholder="Customer ID">
+                </div>
+            </div>
+            <div class="register-btn-div">
+                <a href="{% url 'app:bill_found' %}" class="btn complete-reg-btn">
+                    Continue
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- * App Capsule -->
+
+    <!-- ///////////// Js Files ////////////////////  -->
+    <!-- Jquery -->
+    <script src="{% static "assets/js/lib/jquery-3.4.1.min.js" %}"></script>
+    <!-- Bootstrap-->
+    <script src="{% static "assets/js/lib/popper.min.js" %}"></script>
+    <script src="{% static "assets/js/lib/bootstrap.min.js" %}"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    <!-- Owl Carousel -->
+    <script src="{% static "assets/js/plugins/owl-carousel/owl.carousel.min.js" %}"></script>
+    <!-- jQuery Circle Progress -->
+    <script src="{% static "assets/js/plugins/jquery-circle-progress/circle-progress.min.js" %}"></script>
+    <!-- Base Js File -->
+    <script src="{% static "assets/js/base.js" %}"></script>
+
+
+    <script>
+        setTimeout(() => {
+            notification('notification-welcome', 5000);
+        }, 2000);
+    </script>
+
+</body>
+
+</html>

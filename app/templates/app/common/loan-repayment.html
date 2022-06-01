@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>Paybills - Loan Repayment</title>
+    <meta name="description" content="Paybills - Loan Repayment">
+    <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
+    <link rel="icon" type="image/png" href="{% static "assets/img/favicon.png" %}" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/img/icon/192x192.png" %}">
+    <link rel="stylesheet" href="{% static "assets/css/style.css" %}">
+    <link rel="manifest" href="__manifest.json">
+</head>
+
+<body>
+
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- * loader -->
+
+    <div class="appHeader bg-primary text-light">
+        <div class="left">
+            <a href="{% url 'app:providers' %}" class="headerButton goBack">
+                <ion-icon name="chevron-back-outline" role="img" class="md hydrated" aria-label="chevron back outline"></ion-icon>
+            </a>
+        </div>
+        <div class="pageTitle">Loan Repayment </div>
+        <div class="right">
+        </div>
+    </div>
+
+    <!-- App Capsule -->
+    <div id="appCapsule">
+        <div class="top-logo">
+            <img src="{% static "assets/img/logo.png" %}">
+        </div>
+        <div class="register-bg">
+            <img src="{% static "assets/img/register-bg.png" %}">
+        </div>
+        <div class="register-box">
+            <h1>
+                Loan Repayment
+            </h1>
+            <div class="upi-box">
+                <div class="form-group">
+                    <label>
+                        Provider
+                    </label>
+                    <select class="form-control custom-select">
+                        <option selected disabled value="">Choose...</option>
+                        <option value="226" data-select2-id="69">Capri Global Housing Finance
+                        </option><option value="227" data-select2-id="70">Cars24 Financial Services Private Limited
+                        </option><option value="228" data-select2-id="71">Avanse Financial Services Ltd
+                        </option><option value="229" data-select2-id="72">Shriram City  Union Finance Ltd
+                        </option><option value="230" data-select2-id="73">Arohan Financial Services Ltd
+                        </option><option value="231" data-select2-id="74">OHMYLOAN
+                        </option><option value="232" data-select2-id="75">IDFC FIRST Bank Ltd
+                        </option><option value="233" data-select2-id="76">Annapurna Finance Private Limited-MSME
+                        </option><option value="234" data-select2-id="77">Hero FinCorp Limited
+                        </option><option value="235" data-select2-id="78">i2i Funding-Borrower EMI Repayment
+                        </option><option value="236" data-select2-id="79">Muthoot Microfin Limited
+                        </option><option value="237" data-select2-id="80">Shriram Housing Finance Limited
+                        </option><option value="238" data-select2-id="81">Jana Small Finance Bank
+                        </option><option value="239" data-select2-id="82">Fullerton India Housing Finance Limited
+                        </option><option value="240" data-select2-id="83">L&amp;T Financial Services
+                        </option><option value="241" data-select2-id="84">Manappuram Finance Limited-Vehicle Loan
+                        </option><option value="242" data-select2-id="85">Loksuvidha
+                        </option><option value="243" data-select2-id="86">Axis Finance Limited
+                        </option><option value="244" data-select2-id="87">India Shelter Finance Corporation Limited
+                        </option><option value="245" data-select2-id="88">L and T Housing Finance
+                        </option><option value="246" data-select2-id="89">AAVAS FINANCIERS LIMITED
+                        </option><option value="247" data-select2-id="90">Kinara Capital
+                        </option><option value="248" data-select2-id="91">DMI Finance Private Limited
+                        </option><option value="249" data-select2-id="92">Ess Kay Fincorp Limited
+                        </option><option value="250" data-select2-id="93">Kissht
+                        </option><option value="251" data-select2-id="94">Bajaj Auto Finance
+                        </option><option value="252" data-select2-id="95">Fincare Small Finance Bank
+                        </option><option value="253" data-select2-id="96">ZestMoney
+                        </option><option value="254" data-select2-id="97">OMLP2P.COM
+                        </option><option value="255" data-select2-id="98">Annapurna Finance Private Limited-MFI
+                        </option><option value="256" data-select2-id="99">Bajaj Finance
+                        </option><option value="257" data-select2-id="100">Muthoot Capital Services Ltd
+                        </option><option value="258" data-select2-id="101">Easy Home Finance Limited
+                        </option><option value="259" data-select2-id="102">Faircent-Borrower EMI Account
+                        </option><option value="260" data-select2-id="103">Tata Capital Financial Services Limited
+                        </option><option value="261" data-select2-id="104">Aditya Birla Housing Finance Limited
+                        </option><option value="262" data-select2-id="105">Varthana
+                        </option><option value="263" data-select2-id="106">LOANTAP CREDIT PRODUCTS PRIVATE LIMITED
+                        </option><option value="264" data-select2-id="107">Toyota Financial Services
+                        </option><option value="265" data-select2-id="108">Snapmint
+                        </option><option value="266" data-select2-id="109">Paisa Dukan-Borrower EMI
+                        </option><option value="267" data-select2-id="110">Kanakadurga Finance Limited
+                        </option><option value="268" data-select2-id="111">Mahindra Rural Housing Finance Ltd
+                        </option><option value="269" data-select2-id="112">Capri Global Capital Limited
+                        </option><option value="270" data-select2-id="113">ICICI Bank Ltd - Loans
+                        </option><option value="271" data-select2-id="114">AU Bank Loan Repayment
+                        </option><option value="272" data-select2-id="115">Shriram Transport Finance Company Limited
+                        </option><option value="273" data-select2-id="116">Vastu Housing Finance Corporation Limited
+                        </option><option value="274" data-select2-id="117">Avail
+                        </option><option value="275" data-select2-id="118">Flexsalary
+                        </option><option value="276" data-select2-id="119">Fullerton India credit company limited
+                        </option><option value="277" data-select2-id="120">Adani Capital Pvt Ltd
+                        </option><option value="278" data-select2-id="121">BERAR Finance Limited
+                        </option><option value="279" data-select2-id="122">G U Financial Services Pvt Ltd
+                        </option><option value="280" data-select2-id="123">Indiabulls Consumer Finance Limited
+                        </option><option value="281" data-select2-id="124">Indiabulls Housing Finance Limited
+                        </option><option value="282" data-select2-id="125">Jain Autofin
+                        </option><option value="283" data-select2-id="126">RupeeRedee
+                        </option><option value="284" data-select2-id="127">Clix
+                        </option><option value="285" data-select2-id="128">Baid Leasing and Finance
+                        </option><option value="286" data-select2-id="129">Motilal Oswal Home Finance
+                        </option><option value="287" data-select2-id="130">Oxyzo Financial Services Pvt Ltd
+                        </option><option value="341" data-select2-id="131">Home Credit India Finance Pvt. Ltd
+                        </option></select>
+                </div>
+                <div class="form-group">
+                    <label>Customer Mobile Number</label>
+                    <input class="form-control custom-input" placeholder="Customer Mobile Number">
+                </div>
+                <div class="form-group">
+                    <label>Loan Account Number</label>
+                    <input class="form-control custom-input" placeholder="Customer ID">
+                </div>
+            </div>
+            <div class="register-btn-div">
+                <a href="{% url 'app:bill_found' %}" class="btn complete-reg-btn">
+                    Continue
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- * App Capsule -->
+
+    <!-- ///////////// Js Files ////////////////////  -->
+    <!-- Jquery -->
+    <script src="{% static "assets/js/lib/jquery-3.4.1.min.js" %}"></script>
+    <!-- Bootstrap-->
+    <script src="{% static "assets/js/lib/popper.min.js" %}"></script>
+    <script src="{% static "assets/js/lib/bootstrap.min.js" %}"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    <!-- Owl Carousel -->
+    <script src="{% static "assets/js/plugins/owl-carousel/owl.carousel.min.js" %}"></script>
+    <!-- jQuery Circle Progress -->
+    <script src="{% static "assets/js/plugins/jquery-circle-progress/circle-progress.min.js" %}"></script>
+    <!-- Base Js File -->
+    <script src="{% static "assets/js/base.js" %}"></script>
+
+
+    <script>
+        setTimeout(() => {
+            notification('notification-welcome', 5000);
+        }, 2000);
+    </script>
+
+</body>
+
+</html>

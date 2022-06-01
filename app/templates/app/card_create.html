@@ -1,0 +1,74 @@
+{% extends 'app/wallet_page.html' %}
+{% load static %}
+
+{% block card %}
+
+<!--================Blog Area =================-->
+<article class="blog_item" >
+    <div class="blog_item_img">
+        <img class="card-img rounded-0" src="{% static 'img/banner/profile_banner.png' %}" alt="">
+        <a href="#" class="blog_item_date">
+            <h3><div class="icon"><i class="fa fa-credit-card" aria-hidden="true"></i></div></h3>
+
+        </a>
+    </div>
+    <div class="blog_details">
+        <h2>Add Card</h2><hr>
+        <form action="{% url 'app:card_create' %}" method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        {% for field in form %}
+                            {% for error_msg in field.errors %}
+                                <li>{{ error_msg|escape }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error_msg in form.non_field_errors %}
+                            <li>{{ error_msg|escape }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="input-group-icon mt-10">
+                <div class="icon"><i class="fa fa-credit-card" aria-hidden="true"></i></div>
+                <div class="form-select" id="default-select">
+                    {{ form.card_type }}
+                </div>
+            </div>
+            <div class="input-group-icon mt-10">
+                <div class="icon"><i class="fa fa-credit-card" aria-hidden="true"></i></div>
+                <input type="text" class="single-input" name="{{ form.card_number.html_name }}"
+                       id="{{ form.card_number.id_for_label }}" placeholder="Card Number (16 digits)" required>
+            </div>
+            <div class="input-group-icon mt-10">
+                <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                <input type="text" class="single-input" name="{{ form.owner_first_name.html_name }}"
+                       id="{{ form.owner_first_name.id_for_label }}" placeholder="Card Holder First Name" required>
+            </div>
+            <div class="input-group-icon mt-10">
+                <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                <input type="text" class="single-input" name="{{ form.owner_last_name.html_name }}"
+                       id="{{ form.owner_last_name.id_for_label }}" placeholder="Card Holder Last Name" required>
+            </div>
+            <div class="input-group-icon mt-10">
+                <div class="icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
+                <input type="text" class="single-input" name="{{ form.security_code.html_name }}"
+                       id="{{ form.security_code.id_for_label }}" placeholder="Security Code (3 digits)" required>
+            </div>
+            <div class="input-group-icon mt-10">
+                <div class="icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+                <input class="single-input" name="{{ form.expiration_date.html_name }}"
+                       id="{{ form.expiration_date.id_for_label }}" type="text"
+                       onfocus="(this.type='date')" placeholder="Expiration Date" required>
+            </div>
+
+            <br>
+            <div class="input-group-icon mt-10">
+                <button class="button rounded-0 btn btn-outline-primary" type="submit">Add</button> &nbsp;&nbsp;
+            </div>
+        </form>
+    </div>
+</article>
+    <!--================Blog Area =================-->
+{% endblock %}

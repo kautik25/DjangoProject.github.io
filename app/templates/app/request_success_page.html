@@ -1,0 +1,29 @@
+{% extends 'app/transaction_page.html' %}
+{% load static %}
+
+{% block request %}
+    <section class="blog_area section-padding">
+        <div class="container">
+            <div class="row justify-content-md-center" >
+                <div class="col-lg-8 mb-5 mb-lg-0" >
+                    <article class="blog_item" >
+                        <div class="blog_item_img">
+                            <img class="card-img rounded-0" src="{% static 'img/banner/profile_banner.png' %}" alt="">
+                            <a href="#" class="blog_item_date">
+                                <h3><div class="icon"><i class="flaticon-money-2"></i></div></h3>
+
+                            </a>
+                        </div>
+                        <div class="blog_details">
+                            <h1>Request Success!</h1>
+
+                            <h4><br>Check <a href="{% url 'incomplete' %}"><b>Incomplete Transactions >>></b></a></h4>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

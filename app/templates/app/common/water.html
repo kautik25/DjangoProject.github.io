@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>Paybills - Water</title>
+    <meta name="description" content="Paybills - Water">
+    <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
+    <link rel="icon" type="image/png" href="{% static "assets/img/favicon.png" %}" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/img/icon/192x192.png" %}">
+    <link rel="stylesheet" href="{% static "assets/css/style.css" %}">
+    <link rel="manifest" href="__manifest.json">
+</head>
+
+<body>
+
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- * loader -->
+
+    <div class="appHeader bg-primary text-light">
+        <div class="left">
+            <a href="{% url 'app:providers' %}" class="headerButton goBack">
+                <ion-icon name="chevron-back-outline" role="img" class="md hydrated" aria-label="chevron back outline"></ion-icon>
+            </a>
+        </div>
+        <div class="pageTitle">Water</div>
+        <div class="right">
+        </div>
+    </div>
+
+    <!-- App Capsule -->
+    <div id="appCapsule">
+        <div class="top-logo">
+            <img src="{% static "assets/img/logo.png" %}">
+        </div>
+        <div class="register-bg">
+            <img src="{% static "assets/img/register-bg.png" %}">
+        </div>
+        <div class="register-box">
+            <h1>
+                Water
+            </h1>
+            <div class="upi-box">
+                <div class="form-group">
+                    <label>
+                        Provider
+                    </label>
+                    <select class="form-control custom-select">
+                    <option selected disabled value="">Choose...</option>
+                    <option value="99" data-select2-id="6">Uttarakhand Jal Sansthan
+                    </option><option value="102" data-select2-id="7">Delhi Jal Board
+                    </option><option value="124" data-select2-id="8">Uttrakhand Jal Sansthan B2C
+                    </option><option value="191" data-select2-id="9">Gwalior Municipal Corporation
+                    </option><option value="192" data-select2-id="10">Municipal Corporation of Amritsar
+                    </option><option value="193" data-select2-id="11">Delhi Development Aunthority (DDA)
+                    </option><option value="194" data-select2-id="12">Haryana Urban Development Authority
+                    </option><option value="195" data-select2-id="13">New Delhi Municipal Council (NDMC)
+                    </option><option value="196" data-select2-id="14">Port Blair Municipal Council - Water
+                    </option><option value="197" data-select2-id="15">Hyderabad Metropolitan Water Supply and Sewerage Board
+                    </option><option value="198" data-select2-id="16">Silvassa Municipal Council
+                    </option><option value="199" data-select2-id="17">Greater Warangal Municipal Corporation - Water
+                    </option><option value="200" data-select2-id="18">Punjab Municipal Corporations/Councils
+                    </option><option value="201" data-select2-id="19">Kerala Water Authority (KWA)
+                    </option><option value="202" data-select2-id="20">Kalyan Dombivali Municipal Corporation
+                    </option><option value="203" data-select2-id="21">Municipal Corporation of Gurugram
+                    </option><option value="204" data-select2-id="22">Bangalore Water Supply and Sewerage Board
+                    </option><option value="205" data-select2-id="23">Municipal Corporation Ludhiana - Water
+                    </option><option value="206" data-select2-id="24">Ranchi Municipal Corporation
+                    </option><option value="207" data-select2-id="25">Indore Municipal Corporation - Water
+                    </option><option value="208" data-select2-id="26">Madhya Pradesh Urban (e-Nagarpalika) - Water
+                    </option><option value="209" data-select2-id="27">Municipal Corporation Chandigarh
+                    </option><option value="210" data-select2-id="28">Mysuru City Corporation
+                    </option><option value="211" data-select2-id="29">Pune Municipal Corporation - Water
+                    </option><option value="212" data-select2-id="30">Ujjain Nagar Nigam - PHED
+                    </option><option value="213" data-select2-id="31">Urban Improvement Trust (UIT) - Bhiwadi
+                    </option><option value="214" data-select2-id="32">Bhopal Municipal Corporation - Water
+                    </option><option value="215" data-select2-id="33">Surat Municipal Corporation - Water
+                    </option><option value="216" data-select2-id="34">Municipal Corporation Jalandhar
+                    </option><option value="217" data-select2-id="35">Jabalpur Municipal Corporation - Water
+                    </option><option value="218" data-select2-id="36">Department of Public Health Engineering-Water, Mizoram
+                    </option><option value="219" data-select2-id="37">Vasai Virar Municipal Corporation - Water
+                    </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Customer Mobile Number</label>
+                    <input class="form-control custom-input" placeholder="Customer Mobile Number">
+                </div>
+                <div class="form-group">
+                    <label>Consumer Number (Last 7 Digits)</label>
+                    <input class="form-control custom-input" placeholder="Consumer Number (Last 7 Digits)">
+                </div>
+            </div>
+            <div class="register-btn-div">
+                <a href="{% url 'app:bill_found' %}" class="btn complete-reg-btn">
+                    Continue
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- * App Capsule -->
+
+    <!-- ///////////// Js Files ////////////////////  -->
+    <!-- Jquery -->
+    <script src="{% static "assets/js/lib/jquery-3.4.1.min.js" %}"></script>
+    <!-- Bootstrap-->
+    <script src="{% static "assets/js/lib/popper.min.js" %}"></script>
+    <script src="{% static "assets/js/lib/bootstrap.min.js" %}"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    <!-- Owl Carousel -->
+    <script src="{% static "assets/js/plugins/owl-carousel/owl.carousel.min.js" %}"></script>
+    <!-- jQuery Circle Progress -->
+    <script src="{% static "assets/js/plugins/jquery-circle-progress/circle-progress.min.js" %}"></script>
+    <!-- Base Js File -->
+    <script src="{% static "assets/js/base.js" %}"></script>
+
+
+    <script>
+        setTimeout(() => {
+            notification('notification-welcome', 5000);
+        }, 2000);
+    </script>
+
+</body>
+
+</html>

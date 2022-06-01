@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="{% static "assets/img/favicon.png" %}">
+    <!-- Page Title  -->
+    <title>Paybills - Merchant Signup</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="{% static 'assets/css/dashlite.css' %}">
+    <link id="skin-default" rel="stylesheet" href="{% static 'assets/css/theme.css' %}">
+</head>
+
+<body class="nk-body bg-white npc-default pg-auth">
+    <div class="nk-app-root">
+        <div class="nk-main ">
+            <div class="nk-wrap nk-wrap-nosidebar">
+                <div class="nk-content ">
+                    <div class="nk-block nk-block-middle nk-auth-body wide-xs">
+                        <div class="brand-logo pb-4 text-center">
+                            <a href="{% url 'app:index' %}" class="logo-link">
+                                <img class="logo-dark logo-img logo-img-lg" src="{% static "assets/img/logo.png" %}" alt="logo-dark">
+                            </a>
+                        </div>
+                        <div class="card">
+                            <div class="card-inner card-inner-lg">
+                                <div class="nk-block-head">
+                                    <div class="nk-block-head-content">
+                                        <h4 class="nk-block-title">Create Merchant Account</h4>
+                                    </div>
+                                </div>
+                                <form class="form-contact contact_form" action="#" method="post" id="contactForm" >
+                                    {% csrf_token %}
+                                    
+                                    {% if form.errors %}                
+                                        <p>Please correct the following errors:</p>
+                                        {% for field in form %}
+                                            {% for error in field.errors %}
+                                                <li>{{ error|escape }}</li>
+                                            {% endfor %}
+                                        {% endfor %}
+                    
+                                        {% for error in form.non_field_errors %}
+                                            <li> {{ error|escape }}</li>
+                                        {% endfor %}
+                    
+                                        {% for message in messages %}
+                                            <li> {{ message }}</li>
+                                        {% endfor %}                
+                                    {% endif %}  
+      
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="{{ form.first_name.id_for_label }}">First Name</label>
+                                        <input type="text" class="form-control form-control-lg" name="{{ form.first_name.html_name }}" id="{{ form.first_name.id_for_label }}" placeholder="First Name" required>
+                                        {{ form.first_name.errors }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="{{ form.last_name.id_for_label }}">Last Name</label>
+                                        <input type="text" class="form-control form-control-lg"  name="{{ form.last_name.html_name }}" id="{{ form.last_name.id_for_label }}" placeholder="Last Name" required>
+                                        {{ form.last_name.errors }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="form-label" for="{{ form.email.id_for_label }}">Email</label>
+                                        <input type="text" class="form-control form-control-lg" name="{{ form.email.html_name }}" id="{{ form.email.id_for_label }}" placeholder="Email" required>
+                                        {{ form.email.errors }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <label class="form-label" for="{{ form.password.id_for_label }}">Password</label>
+                                            <a href="#" class="form-icon form-icon-right passcode-switch" data-target="password">
+                                                <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                            </a>
+                                            <input type="password" class="form-control form-control-lg" name="{{ form.password.html_name }}" id="{{ form.password.id_for_label }}" required placeholder="Enter your password">
+                                            {{ form.password.errors }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <label class="form-label" for="{{ form.confirm_password.id_for_label }}">Confirm Password</label>
+                                            <a href="#" class="form-icon form-icon-right passcode-switch" data-target="confirm_password">
+                                                <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                            </a>
+                                            <input type="password" class="form-control form-control-lg" name="{{ form.confirm_password.html_name }}" id="{{ form.confirm_password.id_for_label }}" required placeholder="Confirm password">
+                                            {{ form.confirm_password.errors }}
+                                        </div> 
+                                    </div>                        
+                                    
+                                    <div class="form-group">
+                                        <div class="custom-control custom-control-xs custom-checkbox">
+                                            <input type="checkbox" class="custom-control-input" name="{{ form.accept_tc.html_name }}" id="{{ form.accept_tc.id_for_label }}" >
+                                            <label class="custom-control-label" for="{{ form.accept_tc.id_for_label }}">I accept the <a href="#">Terms and Conditions of the Service</a></label>
+                                            {{ form.accept_tc.errors }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button type='submit' class="btn btn-lg btn-primary btn-block">Create Merchant Account</button>
+                                    </div>                          
+                                </form>
+                            <div>
+                                <p>Already have account? <a href="{% url 'app:merchant_login' %}">Sign in</a></p>
+                            </div>
+                        </div>      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript -->
+    <script src="{% static 'assets/js/bundle.js' %}"></script>
+    <script src="{% static 'assets/js/scripts.js' %}"></script>
+
+</body>
+</html>

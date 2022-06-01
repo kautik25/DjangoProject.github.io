@@ -1,0 +1,34 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="nk-block-head-content">
+        <h3 class="nk-block-title page-title">Update Product Variation</h3>
+    </div>
+    
+    <form method="post"> 
+        {% csrf_token %} 
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label for="{{ form.name.id_for_label }}" class="col-sm-3 control-label">Variation Name:*</label>
+                <div class="col-sm-7">
+                <input value="{{ form.name.value }}" class="form-control" required="" placeholder="Variation Name" type="text" name="{{ form.name.html_name }}" id="{{ form.name.id_for_label }}">
+                {{ form.name.errors }}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="{{ form.value.id_for_label }}" class="col-sm-3 control-label">Variation Value:*</label>
+                <div class="col-sm-7">
+                <input value="{{ form.value.value }}" class="form-control" required="" name="{{ form.value.html_name }}" id="{{ form.value.id_for_label }}" type="text">
+                {{ form.value.errors }}
+                </div>               
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2">                    
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock content %}

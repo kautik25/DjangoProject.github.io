@@ -1,0 +1,74 @@
+from django.contrib import admin
+
+from .models import(
+    UserModel,
+    AudioRecorderModel,
+    SampleStringModel,
+    OTPVerificationModel,
+    BillerInfoModel,
+    MobileRechargeBillModel,
+    UrlShortnerModel,
+    RazorpayTransactionModel,
+    CCAvenueSurchargeModel,
+    RazorpaySurchargeModel,
+    MerchantModel,
+    ProductModel,
+    PaymentModel,
+    CategoryModel,
+    SubcategoryModel,
+    BrandModel,
+    PurchaseModel,
+    SupplierModel,
+    TransactionModel,
+    TaxRatesModel,
+    ExpenseCategoriesModel,
+    StockTransferModel,
+    StockAdjustmentsModel,
+    ProductVariationsModel,
+    LocationModel,
+    SaleModel,
+    SellReturnModel,
+    ExpenseModel,
+    UnitsModel,
+    TaxGroupModel,
+    Orderproduct,
+    Order,
+    BillingAddress, 
+    Coupon,
+    Refund,
+)
+admin.site.register(UserModel)
+admin.site.register(AudioRecorderModel)
+admin.site.register(SampleStringModel)
+admin.site.register(OTPVerificationModel)
+admin.site.register(BillerInfoModel)
+admin.site.register(MobileRechargeBillModel)
+admin.site.register(UrlShortnerModel)
+admin.site.register(RazorpayTransactionModel)
+admin.site.register(CCAvenueSurchargeModel)
+admin.site.register(RazorpaySurchargeModel)
+admin.site.register(MerchantModel)
+admin.site.register(ProductModel)
+admin.site.register(PaymentModel)
+admin.site.register(CategoryModel)
+admin.site.register(SubcategoryModel)
+admin.site.register(BrandModel)
+admin.site.register(PurchaseModel)
+admin.site.register(SupplierModel)
+admin.site.register(TransactionModel)
+admin.site.register(TaxRatesModel)
+admin.site.register(ExpenseCategoriesModel)
+admin.site.register(ProductVariationsModel)
+admin.site.register(LocationModel)
+admin.site.register(SaleModel)
+admin.site.register(SellReturnModel)
+admin.site.register(StockTransferModel)
+admin.site.register(StockAdjustmentsModel)
+admin.site.register(ExpenseModel)
+admin.site.register(UnitsModel)
+admin.site.register(TaxGroupModel)
+admin.site.register(Orderproduct)
+admin.site.register(Order)
+admin.site.register(BillingAddress)
+admin.site.register(Coupon)
+admin.site.register(Refund)

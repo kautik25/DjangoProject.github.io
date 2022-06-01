@@ -1,0 +1,50 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="nk-block-head-content">
+	<h3 class="nk-block-title page-title">Add Tax Rates</h3>    
+</div>
+
+<form method="POST" action="{% url 'app:add_tax_rates' %}" accept-charset="UTF-8" id="tax_rate_add_form">
+      {% csrf_token %}
+                                            
+      {% if form.errors %}                
+        <p>Please correct the following errors:</p>
+        {% for field in form %}
+          {% for error in field.errors %}
+            <li>{{ error|escape }}</li>
+          {% endfor %}
+        {% endfor %}
+
+        {% for error in form.non_field_errors %}
+          <li> {{ error|escape }}</li>
+        {% endfor %}
+
+        {% for message in messages %}
+          <li> {{ message }}</li>
+        {% endfor %}                
+      {% endif %}
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="{{ form.name.id_for_label }}">Tax Name:*</label>
+          <input class="form-control" required="" placeholder="Tax Name" name="{{ form.name.html_name }}" id="{{ form.name.id_for_label }}" type="text">
+          {{ form.name.errors }}
+        </div>
+
+        <div class="form-group">
+          <label for="{{ form.rate.id_for_label }}">Tax Rate %:*</label>
+          <input class="form-control input_number" required="" type="text" value="1" name="{{ form.rate.html_name }}" id="{{ form.rate.id_for_label }}">
+          {{ form.rate.errors }} 
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+
+    </form>
+{% endblock content %}

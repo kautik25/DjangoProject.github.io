@@ -1,0 +1,234 @@
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>Paybills - CCAvenue checkout form</title>
+    <meta name="description" content="CCAvenue checkout form">
+    <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
+    <link rel="icon" type="image/png" href="{% static "assets/img/favicon.png" %}" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/img/icon/192x192.png" %}">
+    <link rel="stylesheet" href="{% static "assets/css/style.css" %}">
+    <link rel="manifest" href="__manifest.json">
+</head>
+<body>
+	 <!-- loader -->
+	 <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+
+    <!-- App Capsule -->
+    <div id="appCapsule">
+        <div class="top-logo">
+            <img src="{% static "assets/img/logo.png" %}">
+        </div>
+        <div class="register-bg">
+            <img src="{% static "assets/img/register-bg.png" %}">
+        </div>
+		<div class="register-box">
+		<form class="form-contact contact_form" action="{% url 'app:ccavenue_payment' %}" method="post" name="customerData" >
+			{% csrf_token %}
+			{% if form.errors %}                
+                    <p>Please correct the following errors:</p>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error|escape }}</li>
+                        {% endfor %}
+                    {% endfor %}
+
+                    {% for error in form.non_field_errors %}
+                        <li> {{ error|escape }}</li>
+                    {% endfor %}
+
+                    {% for message in messages %}
+                        <li> {{ message }}</li>
+                    {% endfor %}                
+            {% endif %}
+		
+			<table width="40%" height="100" border='1' align="center">
+				<caption>
+					<font size="4" color="white"><b>CCAvenue Payment</b></font>
+				</caption>
+			</table>
+			<table width="40%" height="100" border='1' align="center">
+				<tr>
+					<td >Parameter Name:</td>
+					<td>Parameter Value:</td>
+				</tr>
+				<tr>
+					<td colspan="2">Compulsory information</td>
+				</tr>
+				<tr>
+					<td class="form-control">Merchant Id</td>
+					<td><input type="text" name="merchant_id" id="merchant_id" value="{{ merchant_id }}" /> </td>
+				</tr>
+				<tr>
+					<td class="form-control">Order Id</td>
+					<td><input type="text" name="order_id" value="{{ order_id }}" /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Currency</td>
+					<td><input type="text" name="currency" value="INR" readonly/></td>
+				</tr>
+				<tr>
+					<td class="form-control">Amount</td>
+					<td><input type="text" name="amount" value="1.00" /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Redirect URL</td>
+					<td><input type="text" name="redirect_url"
+						value="{{ redirect_url }}" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form-control">Cancel URL</td>
+					<td><input type="text" name="cancel_url"
+						value="{{ cancel_url }}" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form-control">Language</td>
+					<td><input type="text" name="language" id="language" value="EN" readonly/></td>
+				</tr>
+				<tr>
+					<td colspan="2">Billing information(optional):</td>
+				</tr>
+				<tr>
+					<td class="form-control">Billing Name</td>
+					<td><input type="text" name="billing_name" value="Peter" /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Billing Address:</td>
+					<td><input type="text" name="billing_address"
+						value="Santacruz" /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Billing City:</td>
+					<td><input type="text" name="billing_city" value="Mumbai" /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Billing State:</td>
+					<td><input type="text" name="billing_state" value="MH" /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Billing Zip:</td>
+					<td><input type="text" name="billing_zip" value="400054" /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Billing Country:</td>
+					<td><input type="text" name="billing_country" value="India" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form-control">Billing Tel:</td>
+					<td><input type="text" name="billing_tel" value="0229874789" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form-control">Billing Email:</td>
+					<td><input type="text" name="billing_email"
+						value="testing@domain.com" /></td>
+				</tr>
+				<tr>
+					<td colspan="2">Shipping information(optional):</td>
+				</tr>
+				<tr>
+					<td class="form-control">Shipping Name</td>
+					<td><input type="text" name="delivery_name" value="Sam" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form-control">Shipping Address:</td>
+					<td><input type="text" name="delivery_address"
+						value="Vile Parle" /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Shipping City:</td>
+					<td><input type="text" name="delivery_city" value="Mumbai" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form-control">Shipping State:</td>
+					<td><input type="text" name="delivery_state" value="Maharashtra" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form-control">Shipping Zip:</td>
+					<td><input type="text" name="delivery_zip" value="400038" /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Shipping Country:</td>
+					<td><input type="text" name="delivery_country" value="India" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form-control">Shipping Tel:</td>
+					<td><input type="text" name="delivery_tel" value="0221234321" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form-control">Merchant Param1</td>
+					<td><input type="text" name="merchant_param1"
+						value="additional Info." /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Merchant Param2</td>
+					<td><input type="text" name="merchant_param2"
+						value="additional Info." /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Merchant Param3</td>
+					<td><input type="text" name="merchant_param3"
+						value="additional Info." /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Merchant Param4</td>
+					<td><input type="text" name="merchant_param4"
+						value="additional Info." /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Merchant Param5</td>
+					<td><input type="text" name="merchant_param5"
+						value="additional Info." /></td>
+				</tr>
+				<tr>
+					<td class="form-control">Promo Code:</td>
+					<td><input type="text" name="promo_code" value=""/></td>
+				</tr>
+				<tr>
+					<td class="form-control">Customer Id:</td>
+					<td><input type="text" name="customer_identifier" value=""/></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><INPUT TYPE="submit" value="Checkout"></td>
+				</tr>
+			</table>
+		</form>
+		</div>
+	</div>
+
+	<!-- * App Capsule -->
+
+    <!-- ///////////// Js Files ////////////////////  -->
+    <!-- Jquery -->
+    <script src="{% static "assets/js/lib/jquery-3.4.1.min.js" %}"></script>
+    <!-- Bootstrap-->
+    <script src="{% static "assets/js/lib/popper.min.js" %}"></script>
+    <script src="{% static "assets/js/lib/bootstrap.min.js" %}"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    <!-- Owl Carousel -->
+    <script src="{% static "assets/js/plugins/owl-carousel/owl.carousel.min.js" %}"></script>
+    <!-- jQuery Circle Progress -->
+    <script src="{% static "assets/js/plugins/jquery-circle-progress/circle-progress.min.js" %}"></script>
+    <!-- Base Js File -->
+    <script src="{% static "assets/js/base.js" %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends 'shop/index.html' %}
+
+{% block shopdetail %}
+
+{% load static %}
+
+merchant = {{object.merchant.merchant}}<br>
+
+ 
+
+ product_description = {{object.product_description}}<br>
+ product_name = {{object.product_name}}<br>
+ product_stock = {{object.product_stock}}<br>
+ product_price = {{object.product_price}}<br>
+ category_name = {{object.product_category.category_name}}<br>
+ subcategory_name = {{object.product_subcategory.subcategory_name}}<br>
+ product_price = {{object.product_price}}<br>
+ image = <img src = "{{ object.product_image.url }}" width="20%"><br>
+ image = <img src = "{{ object.product_image2.url }}" width="20%"><br>
+ image = <img src = "{{ object.product_image3.url }}" width="20%"> <br><br>
+
+
+
+
+
+
+
+{% comment %} 
+ <div class="item-slick3" data-thumb="{{ object.product_image.url }}">
+    <div class="wrap-pic-w">
+        <img src="{{object.product_image.url}}" alt="{{ object.title }}"">
+    </div>
+ </div> {% endcomment %}
+
+
+
+ choose one option: <br> <br>
+ <a href="{% url 'app:ask_to_play_game' object.slug %}"> Play Game </a> <br> <br> <br>
+ <a href="#"> Flat Discount </a> <br> <br> <br> 
+ <a href="#"> Pay with EMI </a> <br> <br> <br> 
+
+
+
+
+
+
+
+{% endblock %}

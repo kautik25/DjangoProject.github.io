@@ -1,0 +1,51 @@
+{% extends "common/base.html" %}
+
+{% load static %}
+{% block content %}
+<div class="nk-block-head-content">
+	<h3 class="nk-block-title page-title">Add Brands</h3>    
+</div>
+
+<form method="POST" action="{% url 'app:add_brands' %}" accept-charset="UTF-8" id="brand_add_form">
+    {% csrf_token %}
+                                            
+    {% if form.errors %}                
+      <p>Please correct the following errors:</p>
+      {% for field in form %}
+        {% for error in field.errors %}
+          <li>{{ error|escape }}</li>
+        {% endfor %}
+      {% endfor %}
+
+      {% for error in form.non_field_errors %}
+        <li> {{ error|escape }}</li>
+      {% endfor %}
+
+      {% for message in messages %}
+        <li> {{ message }}</li>
+      {% endfor %}                
+    {% endif %}
+
+    <div class="modal-body">      
+
+      <div class="form-group">
+        <label for="{{ form.brand_name.id_for_label }}">Brand name:*</label>
+        <input class="form-control" required="" placeholder="Brand Name" name="{{ form.brand_name.html_name }}" id="{{ form.brand_name.id_for_label }}" type="text">
+        {{ form.brand_name.errors }}
+      </div>    
+
+      <div class="form-group">
+        <label for="{{ form.brand_description.id_for_label }}">Brand Description:*</label>
+        <input class="form-control" required="" placeholder="Short description" name="{{ form.brand_description.html_name }}" id="{{ form.brand_description.id_for_label }}" type="text">
+        {{ form.brand_description.errors }}
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+
+    </form>
+
+{% endblock content %}

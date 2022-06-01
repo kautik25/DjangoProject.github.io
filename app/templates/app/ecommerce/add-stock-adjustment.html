@@ -1,0 +1,172 @@
+{% extends "common/base.html" %}
+
+{% load static %}
+{% block content %}
+<div class="nk-block-head-content">
+    <h3 class="nk-block-title page-title">Add Stock Adjustment</h3>    
+</div>
+
+<form method="POST" action="{% url 'app:add_stock_adjustment' %}" accept-charset="UTF-8" id="stock_adjustment_form">
+	{% csrf_token %}
+                                        
+    {% if form.errors %}                
+        <p>Please correct the following errors:</p>
+        {% for field in form %}
+            {% for error in field.errors %}
+                <li>{{ error|escape }}</li>
+            {% endfor %}
+        {% endfor %}
+
+        {% for error in form.non_field_errors %}
+            <li> {{ error|escape }}</li>
+        {% endfor %}
+
+        {% for message in messages %}
+            <li> {{ message }}</li>
+        {% endfor %}                
+    {% endif %}
+
+	<div class="box box-solid">
+		<div class="box-body">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="{{ form.business_location.id_for_label }}">Business Location:*</label>
+						<div class="input-group">                        
+							<select class="form-control" required="" name="{{ form.business_location.html_name }}" id="{{ form.business_location.id_for_label }}" tabindex="-1" aria-hidden="true">
+								<option selected="selected" value="">Please Select</option>
+								{% for location in location_queryset %}
+									<option value="{{ location.id }}">{{ location.name }}</option>
+								{% endfor %}
+							</select>                                  
+							{{ form.business_location.errors }}                        
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="{{ form.ref_no.id_for_label }}">Reference No:</label>
+						<input class="form-control" name="{{ form.ref_no.html_name }}" id="{{ form.ref_no.id_for_label }}" type="text">
+						{{ form.ref_no.errors }}
+					</div>
+				</div>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="{{ form.stock_adjustment_date.id_for_label }}">Stock Adjustment Date:*</label>
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="fa fa-calendar"></i>
+							</span>
+							<input type="datetime-local" class="form-control" required="" type="text" name="{{ form.stock_adjustment_date.html_name }}" id="{{ form.stock_adjustment_date.id_for_label }}">
+						</div>
+						{{ form.stock_adjustment_date.errors }}
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="{{ form.adjustment_type.id_for_label }}">Adjustment type:*</label>
+						<select class="form-control" name="{{ form.adjustment_type.html_name }}" id="{{ form.adjustment_type.id_for_label }}" tabindex="-1" aria-hidden="true">
+							<option value="" selected="selected">Please Select</option>
+							{% for x,y in form.fields.adjustment_type.choices %}                                                                
+								<option value="{{ x }}">{{ y }}</option>
+							{% endfor %}
+						</select> 
+						{{ form.adjustment_type.errors }}                                       
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!--box end-->
+	<div class="box box-solid">
+		<div class="box-header">
+        	<h3 class="box-title">Search Products</h3>
+       	</div>
+		<div class="box-body">
+			<!-- <div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon">
+								<i class="fa fa-search"></i>
+							</span>
+							<input class="form-control ui-autocomplete-input" id="search_product_for_srock_adjustment" placeholder="Search products for stock adjustment" disabled="" name="search_product" type="text" autocomplete="off">
+						</div>
+					</div>
+				</div>
+			</div> -->
+
+			<div class="row">
+				<div class="col-sm-8 col-sm-offset-2">
+					<div class="form-group">
+						<label for="{{ form.product.id_for_label }}">Product:*</label>
+						<div class="input-group">                                   
+							<select class="form-control" required="" name="{{ form.product.html_name }}" id="{{ form.product.id_for_label }}" tabindex="-1" aria-hidden="true">
+								<option selected="selected" value="">Please Select</option>
+								{% for product in product_queryset %}
+									<option value="{{ product.id }}">{{ product.product_name }}</option>
+								{% endfor %}
+							</select>
+							{{ form.product.errors }}
+						</div>                                
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-10 col-sm-offset-1">
+					<input type="hidden" id="product_row_index" value="0">
+					<input type="hidden" id="total_amount" name="final_total" value="0">
+					<div class="table-responsive">
+					<table class="table table-bordered table-striped table-condensed" id="stock_adjustment_product_table">
+						<thead>
+							<tr>
+								<th class="col-sm-4 text-center">	
+									Product								</th>
+								<th class="col-sm-2 text-center">
+									Quantity								</th>
+								<th class="col-sm-2 text-center">
+									Unit Price								</th>
+								<th class="col-sm-2 text-center">
+									Subtotal								</th>
+								<th class="col-sm-2 text-center"><i class="fa fa-trash" aria-hidden="true"></i></th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+						<tfoot>
+							<tr class="text-center"><td colspan="3"></td><td><div class="pull-right"><b>Total Amount:</b> <span id="total_adjustment">0.00</span></div></td></tr>
+						</tfoot>
+					</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> <!--box end-->
+	<div class="box box-solid">
+		<div class="box-body">
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="{{ form.total_amount_recovered.id_for_label }}">Total Amount Recovered:</label>
+						<input class="form-control input_number" required="" type="text" value="0" name="{{ form.total_amount_recovered.html_name }}" id="{{ form.total_amount_recovered.id_for_label }}">
+						{{ form.total_amount_recovered.errors }}
+					</div>
+				</div>
+				<div class="col-sm-4">					
+					<div class="form-group">
+						<label for="{{ form.reason.id_for_label }}">Reason:</label>
+						<textarea class="form-control" rows="3" cols="50" name="{{ form.reason.html_name }}" id="{{ form.reason.id_for_label }}"></textarea>
+						{{ form.reason.errors }}
+					</div>				
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<button type="submit" class="btn btn-primary pull-right">Save</button>
+				</div>
+			</div>
+		</div>
+	</div> <!--box end-->
+	</form>
+
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends "common/base.html" %}
+{% load static %}
+{% block content %}
+<div class="nk-block-head-content">
+	<h3 class="nk-block-title page-title">Add Tax Group</h3>    
+</div>
+
+<form method="POST" action="{% url 'app:add_tax_group' %}" accept-charset="UTF-8" id="tax_group_add_form">
+  {% csrf_token %}
+                                            
+    {% if form.errors %}                
+      <p>Please correct the following errors:</p>
+      {% for field in form %}
+        {% for error in field.errors %}
+          <li>{{ error|escape }}</li>
+        {% endfor %}
+      {% endfor %}
+
+      {% for error in form.non_field_errors %}
+        <li> {{ error|escape }}</li>
+      {% endfor %}
+
+      {% for message in messages %}
+        <li> {{ message }}</li>
+      {% endfor %}                
+    {% endif %}
+
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="{{ form.name.id_for_label }}">Tax Name:*</label>
+        <input class="form-control" required="" placeholder="Tax Name" name="{{ form.name.html_name }}" id="{{ form.name.id_for_label }}" type="text">
+        {{ form.name.errors }}
+      </div>
+      
+      <div class="form-group">
+        <label for="{{ form.sub_taxes.id_for_label }}">Sub-taxes:*</label>
+        <select class="form-control" required="" name="{{ form.sub_taxes.html_name }}" id="{{ form.sub_taxes.id_for_label }}"
+          tabindex="-1" aria-hidden="true" multiple>        
+          {% for tax_rate in tax_rates_queryset %}
+                <option value="{{ tax_rate.id }}">{{ tax_rate.name }}</option>
+              {% endfor %}                            
+        </select>
+            {{ form.sub_taxes.errors }}
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+
+    </form>
+
+{% endblock content %}

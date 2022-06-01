@@ -1,0 +1,32 @@
+{% extends 'app/wallet_page.html' %}
+{% load static %}
+
+{% block bank %}
+
+<!--================Blog Area =================-->
+    <article class="blog_item" >
+        <div class="blog_item_img">
+            <img class="card-img rounded-0" src="{% static 'img/banner/profile_banner2.png' %}" alt="">
+            <a href="#" class="blog_item_date">
+                <h3><div class="icon"><i class="fa fa-bank" aria-hidden="true"></i></div></h3>
+
+            </a>
+        </div>
+        <div class="blog_details">
+            <h2>Bank Information</h2><hr>
+            <form action="{{ bank.get_delete_url }}" method="post">
+                {% csrf_token %}
+                <ul class="list cat-list">
+                    <li>Are you sure you want to delete bank account ({{ bank }}) ?</li>
+                </ul><br>
+                <button class='button rounded-0 btn btn-outline-danger'
+                        type="submit">Delete Bank</button> &nbsp;&nbsp;
+                <button class="btn rounded-0 btn-outline-primary">
+                    <a href="{{ bank.get_absolute_url }}">Cancel</a>
+                </button>
+
+            </form>
+        </div>
+    </article>
+    <!--================Blog Area =================-->
+{% endblock %}

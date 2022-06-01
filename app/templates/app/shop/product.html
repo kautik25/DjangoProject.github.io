@@ -1,0 +1,99 @@
+{% extends 'shop/index.html' %}
+
+
+
+{% block shopdetail %}
+
+
+{% load static %}
+
+<link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
+
+<main role="main">
+
+    <section class="jumbotron text-center" style="padding-top: 30px; padding-bottom: 30px">
+      <div class="container">
+        <h1 class="jumbotron-heading">Welcome to the Paybills Shop</h1>
+        <p class="lead text-muted">Paybills is a one stop shop for all your fashion and lifestyle needs. Being India's newest e-commerce store for fashion and lifestyle products, Paybills aims at providing a hassle free and enjoyable shopping experience to shoppers across the country with the widest range of brands and products on its portal. </p>
+{% comment %}         
+        <p>
+          <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+        </p>
+         {% endcomment %}
+      </div>
+    </section>
+
+    
+    <div class="album py-5 bg-light">
+      <div class="container">
+        
+        <div class="row">
+
+          {% for product in object_list %}
+
+          <div class="col-md-4">
+            <div class="card mb-4 box-shadow" style="width: 340px">
+              <img class="card-img-top" src = "{{ product.product_image.url }}" alt="Thumbnail [100%x225]" style="display: block; width: 338px; height: 400px ;"  data-holder-rendered="true">
+              <div class="card-body">
+                <p class="card-text">
+                  merchant = {{product.merchant.merchant}}<br>
+                  Product = {{product.product_name}}<br>
+                  
+
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    
+                    <a href="{% url 'app:shopdetail' product.slug %}"><button type="button" class="btn btn-sm btn-outline-secondary" >{{product.product_name}}</button></a>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">{{product.product_price}}</button>
+                  </div>
+                  <small class="text-muted">{{product.product_SKU}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          
+          
+          
+          {% comment %} <div class="wrap-pic-w">
+            <img src="{{ product.product_image.url }}" alt="{{ product.product_name }}">
+          </div> {% endcomment %}
+
+
+        
+          {% endfor %}
+
+         
+        
+         
+          
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+
+{% comment %} 
+
+
+
+<img src="{{ item.product_image }}" alt="IMG-PRODUCT" 
+style="height: 360px;">
+<br>
+merchant = {{item.merchant.merchant}}<br>
+product_description = {{item.product_description}}<br>
+product_name = {{item.product_name}}<br>
+product_stock = {{item.product_stock}}<br>
+product_price = {{item.product_price}}<br>
+category_name = {{item.product_category.category_name}}<br>
+subcategory_name = {{item.product_subcategory.subcategory_name}}<br>
+product_price = {{item.product_price}}<br>
+--------------------------------------------------------------------------------- {% endcomment %}
+
+
+
+{% endblock %}

@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <title>Homepage</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static "img/favicon_1.png" %}" type="image/x-icon">
+    <!--<link src="https://cdn.jsdelivr.net/foundation/6.2.0/foundation.min.css">-->
+    <link rel="stylesheet" href="{% static "assets/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/datepicker.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/owl.theme.default.min.css" %}">
+    <link rel="stylesheet" href="{% static "assets/css/owl.carousel.min.css" %}">
+    <link rel="stylesheet" href="{% static "css/font-awesome.min.css" %}">
+    <link href="{% static "assets/css/animate.min.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "assets/css/style_homepage.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "assets/css/responsive.css" %}" rel="stylesheet" type="text/css">
+</head>
+<style>
+
+</style>
+<body>
+
+<header class="header wow fadeInDown">
+    <div class="main-header">
+        <div class="navigation-wrap start-header start-style">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+
+                            <a class="navbar-brand" href="/">
+                                <img src="{% static 'assets/img/logo.png' %}" alt="logo" width="200">
+                            </a>
+
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ml-auto py-4 py-md-0 align-items-center">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Service</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/aboutus/" style="width: 89px;">About Us</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#" style="width: 96px;">Contact Us</a>
+                                    </li>
+                                    <!-- <li class="nav-item dropdown dropdown-slide dropdown-hover">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Faq
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                            <a class="dropdown-item" href="faq-business.html">For Businesses</a>
+                                            <a class="dropdown-item" href="faqs.html">For Individuals</a>
+                                        </div>
+                                    </li> -->
+                                    <li class="nav-item">
+                                        <a class="btn liner-btn login-btn nav-link" href="{% url 'app:paybill_login' %}">Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="btn liner-btn login-btn nav-link" href="{% url 'app:merchant_login' %}">Merchant Login</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="btn primary-color-btn signup-btn nav-link" href="{% url 'app:create_account' %}">Customer Signup</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="btn primary-color-btn signup-btn nav-link" href="{% url 'app:create_merchant_account' %}">Merchant Signup</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="banner-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-lg-6 col-xl-6">
+                <div class="banner-title wow fadeInLeftBig">
+                    <span>Welcome To PayBills</span>
+                    <h1>
+                        The Smart Way for Online Payment Solution.
+                    </h1>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                    </p>
+                    <div class="banner-btn-div">
+                        <div class="row">
+                            <div class="col-12 col-sm-6">
+                                <a href="#" class="btn liner-btn">
+                                    Explore Business Solutions
+                                </a>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <a href="/create_account/" class="btn primary-color-btn">
+                                    Sign Up Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <small>
+                        *Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    </small>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6 col-xl-6">
+                <div class="banner-photos wow fadeInUpBig">
+                    <img src="{% static 'assets/img/bighero_header_image.png' %}" class="img-fluid" alt="img">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="feature-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <div class="featurebox wow fadeInLeftBig" data-wow-duration="0.5s">
+                    <div class="icon-d">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h6>Ecommerce</h6>
+                        <p>Imperdiet fusce pede nec ipsum quis placerat nunc eros ante risus laoreet </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="featurebox wow fadeInLeftBig" data-wow-duration="1s">
+                    <div class="icon-d">
+                        <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h6>Invoicing</h6>
+                        <p>Imperdiet fusce pede nec ipsum quis placerat nunc eros ante risus laoreet  </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="featurebox wow fadeInLeftBig" data-wow-duration="1.5s">
+                    <div class="icon-d">
+                        <i class="fa fa-ticket" aria-hidden="true"></i>
+                    </div>
+                    <div class="feature-text">
+                        <h6>Ticket & Event</h6>
+                        <p>Imperdiet fusce pede nec ipsum quis placerat nunc eros ante risus laoreet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="realpeople-section">
+    <div class="realbg"></div>
+    <div class="real-content-div">
+        <div class="container">
+            <div class="sec-title-box text-center wow fadeInDown">
+                <h1>
+                    Real People. Real Relationships.
+                </h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>
+                    Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
+                </p>
+            </div>
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <div class="real-box wow fadeInUp">
+                        <div class="real-icon">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </div>
+                        <div class="real-text">
+                            <h1>
+                                457,000 <span>+</span>
+                            </h1>
+                            <p>
+                                Happy Client
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="real-box wow fadeInUp">
+                        <div class="real-icon">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                        </div>
+                        <div class="real-text">
+                            <h1>
+                                4,182 <span>+</span>
+                            </h1>
+                            <p>
+                                Merchant
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="real-box wow fadeInUp">
+                        <div class="real-icon">
+                            <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="real-text">
+                            <h1>
+                                511 <span>+</span>
+                            </h1>
+                            <p>
+                                Official Partner
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="real-box wow fadeInUp">
+                        <div class="real-icon">
+                            <i class="fa fa-globe" aria-hidden="true"></i>
+                        </div>
+                        <div class="real-text">
+                            <h1>
+                                57 <span>+</span>
+                            </h1>
+                            <p>
+                                Country
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="about-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-7">
+                <div class="about-img-div wow fadeInLeftBig">
+                    <img src="{% static 'assets/img/about_us-1.png' %}" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="about-text-div content-div wow fadeInRightBig">
+                    <span class="tag-title">About Us</span>
+                    <h1 class="hi-tag mb-3">
+                        Integrate your shopping cart in a matter of minutes.
+                    </h1>
+                    <p class="p-tag mb-3">
+                        Aliquam pretium dictumst imperdiet potenti tempor sit molestie fringilla platea duis commodo
+                    </p>
+                    <a href="#" class="btn primary-color-btn">Discover More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="smart-section">
+    <div class="container">
+        <div class="smart-text-div content-div text-center mb-5">
+            <span class="tag-title">Featured</span>
+            <h1 class="hi-tag mb-3">
+                Smart Solution for Your Payment
+            </h1>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="smart-box wow fadeInUp">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <h5>Payment Methods</h5>
+                    <p>Metus ridiculus maximus est facilisi dolor ante penatibus cursus litora </p>
+                    <a href="#" class="btn learn-btn">
+                        Learm More <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="smart-box wow fadeInUp">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <h5>Subscriptions</h5>
+                    <p>Metus ridiculus maximus est facilisi dolor ante penatibus cursus litora</p>
+                    <a href="#" class="btn learn-btn">
+                        Learm More <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="smart-box wow fadeInUp">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <h5> Split Payments </h5>
+                    <p>Metus ridiculus maximus est facilisi dolor ante penatibus cursus litora</p>
+                    <a href="#" class="btn learn-btn">
+                        Learm More <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="smart-box wow fadeInUp">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <h5>Request a Payment</h5>
+                    <p>Metus ridiculus maximus est facilisi dolor ante penatibus cursus litora</p>
+                    <a href="#" class="btn learn-btn">
+                        Learm More <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="smart-box wow fadeInUp">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <h5> Onsite Payments</h5>
+                    <p>Metus ridiculus maximus est facilisi dolor ante penatibus cursus litora</p>
+                    <a href="#" class="btn learn-btn">
+                        Learm More <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="smart-box wow fadeInUp">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <h5>Secure Transactions</h5>
+                    <p>Metus ridiculus maximus est facilisi dolor ante penatibus cursus litora</p>
+                    <a href="#" class="btn learn-btn">
+                        Learm More <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="smart-box wow fadeInUp">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <h5> e-Wallet </h5>
+                    <p>Metus ridiculus maximus est facilisi dolor ante penatibus cursus litora</p>
+                    <a href="#" class="btn learn-btn">
+                        Learm More <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="smart-box wow fadeInUp">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <h5> Ecommerce Integrations </h5>
+                    <p>Metus ridiculus maximus est facilisi dolor ante penatibus cursus litora</p>
+                    <a href="#" class="btn learn-btn">
+                        Learm More <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="smart-box wow fadeInUp">
+                    <i class="fa fa-globe" aria-hidden="true"></i>
+                    <h5>  Mobile Support  </h5>
+                    <p>Metus ridiculus maximus est facilisi dolor ante penatibus cursus litora</p>
+                    <a href="#" class="btn learn-btn">
+                        Learm More <i class="fa fa-share-square-o" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="landing-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="landing-content text-white text-center wow fadeInDown">
+                    <h1>
+                        Leading, Trusted. Enabling growth.
+                    </h1>
+                    <h5>
+                        Hendrerit eget tincidunt elit ex ullamcorper condimentum volutpat cubilia nam
+                    </h5>
+                    <div class="landing-btn-div">
+                        <a href="#" class="btn liner-btn">
+                            Explore Business Solutions
+                        </a>
+                        <a href="#" class="btn primary-color-btn">
+                            Sign Up Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonial-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <div class="about-img-div wow fadeInLeftBig">
+                    <img src="{% static 'assets/img/page-5.png' %}" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="about-text-div content-div wow fadeInRightBig">
+                    <span class="tag-title">Testimonial</span>
+                    <h1 class="hi-tag mb-3">
+                        What They Say About Us.
+                    </h1>
+                    <p class="p-tag mb-3">
+                        Aliquam pretium dictumst imperdiet potenti tempor.
+                    </p>
+                    <div class="testimonial-slider-div">
+                        <div class="testimonial owl-carousel owl-theme">
+                            <div class="item">
+                                <div class="testimonial-div">
+                                    <div class="testimonial-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
+                                        ullamcorper mattis, pulvinar dapibus leo.
+                                    </div>
+                                    <div class="testimonial-imgname">
+                                        <div class="test-img">
+                                            <img src="{% static 'assets/img/happy-woman-smiling-e1629382085506.jpg' %}" class="img-fluid">
+                                        </div>
+                                        <div class="testimonial-name">
+                                            <h6>John Doe</h6>
+                                            <p>Ceo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="testimonial-div">
+                                    <div class="testimonial-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
+                                        ullamcorper mattis, pulvinar dapibus leo.
+                                    </div>
+                                    <div class="testimonial-imgname">
+                                        <div class="test-img">
+                                            <img src="{% static 'assets/img/happy-woman-smiling-e1629382085506.jpg' %}" class="img-fluid">
+                                        </div>
+                                        <div class="testimonial-name">
+                                            <h6>John Doe</h6>
+                                            <p>Ceo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="item">
+                                <div class="testimonial-div">
+                                    <div class="testimonial-text">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
+                                        ullamcorper mattis, pulvinar dapibus leo.
+                                    </div>
+                                    <div class="testimonial-imgname">
+                                        <div class="test-img">
+                                            <img src="{% static 'assets/img/happy-woman-smiling-e1629382085506.jpg' %}" class="img-fluid">
+                                        </div>
+                                        <div class="testimonial-name">
+                                            <h6>John Doe</h6>
+                                            <p>Ceo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="faq-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="content-div wow fadeInLeftBig">
+                    <span class="tag-title">Faq</span>
+                    <h1 class="hi-tag mb-3">
+                        Frequently Ask Questions
+                    </h1>
+                    <p class="p-tag mb-3">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper
+                        mattis, pulvinar dapibus leo.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="faq-collapse-div wow fadeInRightBig">
+                    <div id="faq-accordion">
+                        <div class="card">
+                            <div class="card-header" id="faqheading1">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#faqcollapse1" aria-expanded="true" aria-controls="faqcollapse1">
+                                        Mattis tincidunt consectetur tortor in?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="faqcollapse1" class="collapse show" aria-labelledby="faqheading1" data-parent="#faq-accordion">
+                                <div class="card-body">
+                                    Turpis adipiscing pede letius commodo amet maecenas magnis nibh lacinia. Parturient
+                                    praesent magna maximus est nostra convallis mollis mauris.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="faqheading2">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#faqcollapse2" aria-expanded="false" aria-controls="faqcollapse2">
+                                        Potenti platea consectetuer mauris integer orci?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="faqcollapse2" class="collapse" aria-labelledby="faqheading2" data-parent="#faq-accordion">
+                                <div class="card-body">
+                                    Turpis adipiscing pede letius commodo amet maecenas magnis nibh lacinia. Parturient
+                                    praesent magna maximus est nostra convallis mollis mauris.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="faqheading3">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#faqcollapse3" aria-expanded="false" aria-controls="faqcollapse3">
+                                        Lacus vestibulum adipiscing dis pretium?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="faqcollapse3" class="collapse" aria-labelledby="faqheading3" data-parent="#faq-accordion">
+                                <div class="card-body">
+                                    Turpis adipiscing pede letius commodo amet maecenas magnis nibh lacinia. Parturient
+                                    praesent magna maximus est nostra convallis mollis mauris.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="faqheading4">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#faqcollapse4" aria-expanded="false" aria-controls="faqcollapse4">
+                                        Litora sodales libero arcu finibus?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="faqcollapse4" class="collapse" aria-labelledby="faqheading4" data-parent="#faq-accordion">
+                                <div class="card-body">
+                                    Turpis adipiscing pede letius commodo amet maecenas magnis nibh lacinia. Parturient
+                                    praesent magna maximus est nostra convallis mollis mauris.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="faqheading5">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#faqcollapse5" aria-expanded="false" aria-controls="faqcollapse5">
+                                        Himenaeos urna senectus gravida consectetur parturient ad?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="faqcollapse5" class="collapse" aria-labelledby="faqheading5" data-parent="#faq-accordion">
+                                <div class="card-body">
+                                    Turpis adipiscing pede letius commodo amet maecenas magnis nibh lacinia. Parturient
+                                    praesent magna maximus est nostra convallis mollis mauris.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="faqheading6">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#faqcollapse6" aria-expanded="false" aria-controls="faqcollapse6">
+                                        Pellentesque sagittis sem?
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="faqcollapse6" class="collapse" aria-labelledby="faqheading6" data-parent="#faq-accordion">
+                                <div class="card-body">
+                                    Turpis adipiscing pede letius commodo amet maecenas magnis nibh lacinia. Parturient
+                                    praesent magna maximus est nostra convallis mollis mauris.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="start-paybill-section wow fadeInUp">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="start-paybill-div">
+                    <div class="landing-content text-center">
+                        <h1>
+                            Leading, Trusted. Enabling growth.
+                        </h1>
+                        <h5>
+                            Hendrerit eget tincidunt elit ex ullamcorper condimentum volutpat cubilia nam
+                        </h5>
+                        <div class="start-btn-div">
+                            <a href="#" class="btn liner-btn">
+                                Explore Business Solutions
+                            </a>
+                            <a href="#" class="btn primary-color-btn">
+                                Sign Up Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer class="footer wow fadeInDown">
+    <div class="container">
+        <div class="top-footer">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="footer-div">
+                        <div class="footer-logo">
+                            <img src="{% static 'assets/img/logo.png' %}" class="img-fluid">
+                        </div>
+                        <div class="footer-text">
+                            <p class="p-tag">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </p>
+                        </div>
+                        <div class="footer-app-div">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="appimg">
+                                        <img src="{% static 'assets/img/Google-Play_button.png' %}" class="img-fluid" alt="google">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="appimg">
+                                        <img src="{% static 'assets/img/App-Store_button.png' %}" class="img-fluid" alt="AppStore">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="footer-div">
+                                <h5>Company</h5>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            About Us
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Leadership
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Careers
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Blog & Article
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Press Release
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Legal Notice
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="footer-div">
+                                <h5>
+                                    Get Started
+                                </h5>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            Startups & Early
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Businesses
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Growing businesses
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Enterprise
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="footer-div">
+                                <h5>
+                                    Featured
+                                </h5>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            Payment Methods
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Subscriptions
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Token
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Onsite Payment
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Merchant Refund
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="footer-div">
+                                <h5>Support</h5>
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            Help Center
+
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            My Account
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Ticket Support
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Contact Us
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-footer text-right">
+            <div class="row">
+                <div class="col-6">
+                    <div class="bt-footer">
+                        <ul class="ml-0">
+                            <li>
+                                <a href="#">
+                                    Term of use
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Cookie Policy
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Do Not Sell My Personal Information
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="bt-footer">
+                        <ul>
+                            <li class="mr-0">
+                                Copyright © 2021 Paybills, All rights reserved. Powered by Kintudesign.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="web-intro">
+                        <p>
+                            Disclaimer Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nec sagittis dolor.
+                            Maecenas quam nunc, tincidunt quis facilisis ut, faucibus eget lacus. Duis in tellus dignissim
+                            augue faucibus facilisis.Maecenas quam nunc, tincidunt quis facilisis ut, faucibus eget lacus.
+                            Duis in tellus dignissim augue faucibus facilisis.
+                        </p>
+                        <div class="social-div">
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-facebook" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-instagram" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-youtube-play" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+<script src="{% static 'assets/js/lib/jquery.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/popper.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/bootstrap-datepicker.js' %}"></script>
+<script src="{% static 'assets/js/lib/owl.carousel.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/wow.min.js' %}"></script>
+<script src="{% static 'assets/js/lib/custom.js' %}"></script>
+
+<script>
+    $('.testimonial').owlCarousel({
+        loop:true,
+        margin:30,
+        dots: true,
+        nav:false,
+        items:2,
+        responsive:{
+            0:{
+                items:1
+            },
+            600:{
+                items:2
+            },
+            1000:{
+                items:2
+            }
+        }
+    })
+</script>
+
+</html>

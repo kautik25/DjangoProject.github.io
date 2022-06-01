@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" class="js">
+{% load static %}
+{% load tz %}
+{% load i18n %}
+{% get_current_timezone as TIME_ZONE %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Softnio">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="{% static "assets/img/favicon.png" %}">
+    <!-- Page Title  -->
+    <title>Paybills - Merchant Registration</title>
+    <!-- StyleSheets  -->
+    <link rel="stylesheet" href="{% static 'assets/css/dashlite.css' %}">
+    <link id="skin-default" rel="stylesheet" href="{% static 'assets/css/theme.css' %}">
+</head>
+
+<body class="nk-body bg-white npc-default pg-auth">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- wrap @s -->
+            <div class="nk-wrap nk-wrap-nosidebar">
+                <!-- content @s -->
+                <div class="nk-content ">
+                    <div class="nk-block nk-block-middle nk-auth-body wide-xs">
+                        <div class="brand-logo pb-4 text-center">
+                            <a href="{% url 'app:index' %}" class="logo-link">
+                                <img class="logo-dark logo-img logo-img-lg" src="{% static "assets/img/logo.png" %}" alt="logo-dark">
+                            </a>
+                        </div>
+                        <div class="card">
+                            <div class="card-inner card-inner-lg">
+                                <div class="nk-block-head">
+                                    <div class="nk-block-head-content">
+                                        <h4 class="nk-block-title">Create Merchant Account</h4>
+                                    </div>
+                                </div>
+                        
+                                <p>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</p>
+                                <form action="" method="post" style="width: 800px;">
+                                  {% csrf_token %}                                  
+                                    
+                                    {% if form.errors %}                
+                                        <p>Please correct the following errors:</p>
+                                        {% for field in form %}
+                                            {% for error in field.errors %}
+                                                <li>{{ error|escape }}</li>
+                                            {% endfor %}
+                                        {% endfor %}
+                    
+                                        {% for error in form.non_field_errors %}
+                                            <li> {{ error|escape }}</li>
+                                        {% endfor %}
+                    
+                                        {% for message in messages %}
+                                            <li> {{ message }}</li>
+                                        {% endfor %}                
+                                    {% endif %} 
+                                  <table>
+                                  {{ wizard.management_form }}
+                                  <!-- {% if wizard.form.forms %}
+                                    {{ wizard.form.management_form }}
+                                    {% for form in wizard.form.forms %}                                     
+                                      {{ form }}
+                                    {% endfor %}
+                                  {% else %}
+                                    {{ wizard.form }}                                    
+                                  {% endif %} -->                                  
+                                  {% for field in wizard.form %}
+                                  
+                                    {% if field.name == 'first_name' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.first_name.id_for_label }}">First Name</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" class="form-control required" name="{{ form.first_name.html_name }}" id="{{ form.first_name.id_for_label }}" placeholder="First Name" required>
+                                                {{ form.first_name.errors }}
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                    {% endif %}
+
+                                    {% if field.name == 'last_name' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.last_name.id_for_label }}">Last Name</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" class="form-control required" name="{{ form.last_name.html_name }}" id="{{ form.last_name.id_for_label }}" placeholder="Last Name" required>
+                                                {{ form.last_name.errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if field.name == 'email' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.email.id_for_label }}">Email Address</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" data-msg-email="Wrong Email" class="form-control required email" name="{{ form.email.html_name }}" id="{{ form.email.id_for_label }}" placeholder="Email" required>
+                                                {{ form.email.errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if field.name == 'password' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.password.id_for_label }}">Password</label>
+                                            <div class="form-control-wrap">
+                                                <a href="#" class="form-icon form-icon-right passcode-switch" data-target="password">
+                                                    <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                    <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                                </a>
+                                                <input type="password" data-msg="Required" class="form-control required" name="{{ form.password.html_name }}" id="{{ form.password.id_for_label }}" required placeholder="Enter your password">
+                                                {{ form.password.errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if field.name == 'confirm_password' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.confirm_password.id_for_label }}">Confirm Password</label>
+                                            <div class="form-control-wrap"  style="padding-bottom: 15px;">
+                                                <a href="#" class="form-icon form-icon-right passcode-switch" data-target="confirm_password">
+                                                    <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                                    <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                                                </a>
+                                                <input type="password" data-msg="Required" class="form-control required" name="{{ form.confirm_password.html_name }}" id="{{ form.confirm_password.id_for_label }}" required placeholder="Confirm password">
+                                                {{ form.confirm_password.errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if field.name == 'accept_tc' %}
+                                    <div class="col-md-12">
+                                        <div class="custom-control custom-checkbox" style="padding-bottom: 20px;">
+                                            <input type="checkbox" data-msg="Required" class="custom-control-input required" name="{{ form.accept_tc.html_name }}" id="accept_tc_id" required>
+                                            <label class="custom-control-label" for="accept_tc_id">I accept the <a href="#">Terms and Conditions of the Service</a></label>
+                                            {{ form.accept_tc.errors }}
+                                        </div>
+                                    </div> 
+                                    {% endif %}
+
+                                    {% if field.name == 'business_name' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.business_name.id_for_label }}">Business Name</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" class="form-control required" name="{{ form.business_name.html_name }}" id="{{ form.business_name.id_for_label }}" placeholder="Business name" required>
+                                                {{ form.business_name.errors }}
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                    {% endif %}
+
+                                    {% if field.name == 'subdomain_name' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.subdomain_name.id_for_label }}">Sub-domain Name</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" class="form-control required" name="{{ form.subdomain_name.html_name }}" id="{{ form.subdomain_name.id_for_label }}" placeholder="Sub Domain Name" required>
+                                                {{ form.subdomain_name.errors }}
+                                            </div>
+                                        </div>                                        
+                                    </div> 
+                                    {% endif %}
+
+                                    {% if field.name == 'phone_number' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.phone_number.id_for_label }}">Mobile number</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" class="form-control required" name="{{ form.phone_number.html_name }}" id="{{ form.phone_number.id_for_label }}" placeholder="Mobile Number" required>
+                                                {{ form.phone_number.errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if field.name == 'upi_id' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.upi_id.id_for_label }}">UPI ID</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" class="form-control required" name="{{ form.upi_id.html_name }}" id="{{ form.upi_id.id_for_label }}" placeholder="UPI ID" required>
+                                                {{ form.upi_id.errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if field.name == 'merchant_category' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="merchant_category_id">Merchant Category</label>
+                                            <div class="form-control-wrap ">
+                                                <div class="form-control-select">
+                                                    <select class="form-control" data-msg="Required" id="merchant_category_id" name="{{ form.merchant_category.html_name }}">
+                                                        <option selected disabled value="">Merchant Category</option>
+                                                        {% for x,y in form.fields.merchant_category.choices %}                                                                
+                                                            <option value="{{ x }}">{{ y }}</option>
+                                                        {% endfor %}                                                           
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+                                    {% endif %}
+                                    
+                                    {% if field.name == 'country' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="country_id">Country</label>
+                                            <div class="form-control-wrap ">
+                                                <div class="form-control-select">
+                                                    <select class="form-control required" data-msg="Required" id="country_id" name="{{ form.country.html_name }}" required onchange="loadStates()">
+                                                        <!-- <option selected disabled value="">country</option> -->
+                                                        {% for obj in country_queryset %}
+                                                            <option value="{{ obj.id }}">{{ obj.name }}</option>
+                                                        {% endfor %}               
+                                                    </select> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if field.name == 'state' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                        <label class="form-label" for="state_id">State</label>
+                                            <div class="form-control-wrap ">
+                                                <div class="form-control-select">
+                                                    <select class="form-control required" data-msg="Required" id="state_id" name="{{ form.state.html_name }}" required onchange="loadCities()">
+                                                        <!-- <option selected disabled value="">state</option> -->
+                                                        {% for obj in state_queryset %}
+                                                            <option value="{{ obj.id }}">{{ obj.name }}</option>
+                                                        {% endfor %}               
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if field.name == 'city' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="city_id">City</label>
+                                            <div class="form-control-wrap ">
+                                                <div class="form-control-select">
+                                                    <select class="form-control required" data-msg="Required" id="city_id" name="{{ form.city.html_name }}" required>
+                                                        <!-- <option selected disabled value="">city</option> -->
+                                                        {% for obj in city_queryset %}
+                                                            <option value="{{ obj.id }}">{{ obj.name }}</option>
+                                                        {% endfor %}               
+                                                    </select>    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if field.name == 'timezone' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="timezone">Time zone</label>
+                                            <div class="form-control-wrap ">
+                                                <div class="form-control-select">
+                                                    <select class="form-control required" data-msg="Required" id="timezone" name="{{ form.timezone.html_name }}">
+                                                        {% for tz in timezones %}
+                                                        <option value="{{ tz }}"{% if tz == TIME_ZONE %} selected{% endif %}>{{ tz }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}  
+
+                                    {% if field.name == 'tax_1_name' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.tax_1_name.id_for_label }}">Tax 1 Name</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" class="form-control required" name="{{ form.tax_1_name.html_name }}" id="{{ form.tax_1_name.id_for_label }}" placeholder="GST/VAT/Other" required>
+                                                {{ form.tax_1_name.errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %} 
+
+                                    {% if field.name == 'tax_1_no' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.tax_1_no.id_for_label }}">Tax 1 No</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" class="form-control required" name="{{ form.tax_1_no.html_name }}" id="{{ form.tax_1_no.id_for_label }}" required>
+                                                {{ form.tax_1_no.errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if field.name == 'tax_2_name' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.tax_2_name.id_for_label }}">Tax 2 Name</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" class="form-control required" name="{{ form.tax_2_name.html_name }}" id="{{ form.tax_2_name.id_for_label }}" placeholder="GST/VAT/Other" required>
+                                                {{ form.tax_2_name.errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if field.name == 'tax_2_no' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label" for="{{ form.tax_2_no.id_for_label }}">Tax 2 No</label>
+                                            <div class="form-control-wrap">
+                                                <input type="text" data-msg="Required" class="form-control required" name="{{ form.tax_2_no.html_name }}" id="{{ form.tax_2_no.id_for_label }}" required>
+                                                {{ form.tax_2_no.errors }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if field.name == 'finanicial_year_start_month' %}
+                                    <div class="col-md-6">
+                                        <div class="form-group">                                            
+                                            <label class="form-label" for="finanicial_year_start_month_id">Finanicial year start month</label>
+                                            <div class="form-control-wrap ">
+                                                <div class="form-control-select">
+                                                    <select class="form-control" data-msg="Required" id="finanicial_year_start_month_id" name="{{ form.finanicial_year_start_month.html_name }}">
+                                                        {% for x,y in form.fields.finanicial_year_start_month.choices %}                                                                
+                                                            <option value="{{ x }}">{{ y }}</option>
+                                                        {% endfor %}                                                           
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endif %}                                    
+                                    
+                                  {% endfor %}
+                                    
+                                  </table>
+                                  {% if wizard.steps.prev %}
+                                  <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}">{% trans "first step" %}</button>
+                                  <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">{% trans "prev step" %}</button>
+                                  {% endif %}
+                                  <input type="submit" value="{% trans "Submit" %}" style=" margin-left: 15px;" />
+                                  </form>
+                                                                     
+                                
+
+                                <div class="form-note-s2 text-center pt-4"> Already have an account? <a href="{% url 'app:merchant_login' %}"><strong>Sign in</strong></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- wrap @e -->
+            </div>
+            <!-- content @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+    <!-- JavaScript -->
+    <script src="{% static 'assets/js/bundle.js' %}"></script>
+    <script src="{% static 'assets/js/scripts.js' %}"></script>
+
+    <script src="{% static "assets/js/lib/jquery-3.4.1.min.js" %}"></script>
+    <script type="text/javascript">
+
+        function loadStates()
+        {
+                console.log("country changed");
+                const url = "{% url 'app:load_states' %}";  // get the url of the `load_states` view
+                console.log("url", url);
+                const countryId = document.getElementById("country_id").value
+                console.log("country changed:", countryId);
+
+                $.ajax({                       // initialize an AJAX request
+                    url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+                    data: {
+                        'country_id': countryId       // add the country id to the GET parameters
+                    },
+                    success: function (data) {   // `data` is the return of the `load_states` view function
+                        var $el = $("#state_id");
+                        $el.empty(); // remove old options
+                        data.forEach(function (state) {
+                            console.log(state.name)
+                            $el.append($("<option></option>")
+                                .attr("value", state.id).text(state.name));
+                            });
+                    }                   
+                });
+        }
+
+        function loadCities()
+        {
+                console.log("state changed");
+                const url = "{% url 'app:load_cities' %}";  // get the url of the `load_states` view
+                console.log("url", url);
+                const stateId = document.getElementById("country_id").value
+                console.log("state changed:", stateId);
+
+                $.ajax({                       // initialize an AJAX request
+                    url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+                    data: {
+                        'state_id': stateId       // add the country id to the GET parameters
+                    },
+                    success: function (data) {   // `data` is the return of the `load_states` view function
+                        var $el = $("#city_id");
+                        $el.empty(); // remove old options
+                        data.forEach(function (city) {
+                            console.log(city.name)
+                            $el.append($("<option></option>")
+                                .attr("value", city.id).text(city.name));
+                            });
+                    }                   
+                });
+        }
+
+    </script>
+</body>
+</html>

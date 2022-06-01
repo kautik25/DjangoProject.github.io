@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>Paybills - Data Personalization</title>
+    <meta name="description" content="Paybills - Data Personalization">
+    <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
+    <link rel="icon" type="image/png" href="{% static "assets/img/favicon.png" %}" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/img/icon/192x192.png" %}">
+    <link rel="stylesheet" href="{% static "assets/css/style.css" %}">
+    <link rel="manifest" href="__manifest.json">
+</head>
+
+<body>
+
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- * loader -->
+
+    <div class="appHeader bg-primary text-light">
+        <div class="left">
+            <a href="{% url 'app:privacy_security' %}" class="headerButton goBack">
+                <ion-icon name="chevron-back-outline" role="img" class="md hydrated" aria-label="chevron back outline"></ion-icon>
+            </a>
+        </div>
+        <div class="pageTitle">Data & personalization</div>
+    </div>
+
+    <!-- App Capsule -->
+    <div class="appcapsule">
+        <div class="register-bg">
+            <img src="{% static "assets/img/register-bg.png" %}">
+        </div>
+        <div class="data-personalization-div">
+            <div class="notfy-email-box">
+                <p>
+                    Your personal information is never shared publicly or sold to anyone.
+                </p>
+                <p>
+                    You can change your app settings here and manage payment info. transactions, and activity in your <a href="#">Google Account.</a>
+                </p>
+            </div>
+            <div class="data-per-detail-box">
+                <ul class="perm-ul">
+                    <li>
+                        <div class="notifi-per-bx">
+                            <h6>Personalization within Google Pay</h6>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="pemissionswitch1" checked="">
+                                <label class="custom-control-label" for="pemissionswitch1"></label>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="for-ex">
+                    <ion-icon name="bulb-outline"></ion-icon>
+                    <p class="text-muted">
+                        For example, get offers from stores where you shop
+                        and recommendations for ways to save
+                    </p>
+                </div>
+                <div class="pers-deta">
+                    <p>
+                        When you use Google Pay, things you do and keep (like transactions,
+                        your forms of payment, transit, and loyalty cards) are saved in your
+                        Google Account. If you turn on Personalization within Google Pay,
+                        this data and additional into (like the location where you made a
+                        purchase) will also be saved and used to personalize your
+                        Google Pay experience.
+                    </p>
+                    <p>
+                        Google Pay still works with this setting off. Things you do and keep
+                        will still be saved to provide the service, but they won't be used for
+                        personalization. For example, you'll be able to make contactless
+                        payments, but the offers you see might be less relevant.
+                    </p>
+                    <p>
+                        Turning this setting on or off will not change how your purchases are
+                        saved and used in other Google services (like apps you buy in Play
+                        or movies you rent in YouTube).
+                    </p>
+                    <a href="#">Learn more about personalization</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- * App Capsule -->
+
+    <!-- ///////////// Js Files ////////////////////  -->
+    <!-- Jquery -->
+    <script src="{% static "assets/js/lib/jquery-3.4.1.min.js" %}"></script>
+    <!-- Bootstrap-->
+    <script src="{% static "assets/js/lib/popper.min.js" %}"></script>
+    <script src="{% static "assets/js/lib/bootstrap.min.js" %}"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    <!-- Owl Carousel -->
+    <script src="{% static "assets/js/plugins/owl-carousel/owl.carousel.min.js" %}"></script>
+    <!-- jQuery Circle Progress -->
+    <script src="{% static "assets/js/plugins/jquery-circle-progress/circle-progress.min.js" %}"></script>
+    <!-- Base Js File -->
+    <script src="{% static "assets/js/base.js" %}"></script>
+
+
+    <script>
+        setTimeout(() => {
+            notification('notification-welcome', 5000);
+        }, 2000);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>Paybills - Send money</title>
+    <meta name="description" content="Paybills - Send money">
+    <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
+    <link rel="icon" type="image/png" href="{% static "assets/img/favicon.png" %}" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/img/icon/192x192.png" %}">
+    <link rel="stylesheet" href="{% static "assets/css/style.css" %}">
+    <link rel="manifest" href="__manifest.json">
+</head>
+
+<body>
+
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- * loader -->
+
+     <!-- App Capsule -->
+    <div id="appCapsule" class="pt-2">
+        <div class="top-logo">
+            <img src="{% static "assets/img/logo.png" %}">
+        </div>
+        <div class="register-bg">
+            <img src="{% static "assets/img/register-bg.png" %}">
+        </div>
+        <div class="btn complete-reg-btn">
+            <form class="form-contact contact_form" action={% url 'app:razorpay_payment_handler' %} method="POST">
+                {% csrf_token %}
+                <script
+                    src="https://checkout.razorpay.com/v1/checkout.js"
+                    data-key={{razorpay_merchant_key}}
+                    data-amount={{razorpay_amount}}
+                    data-currency={{currency}}
+                    data-order_id={{razorpay_order_id}}
+                    data-buttontext="Pay with Razorpay"
+                    data-name="Send Money"
+                    data-description={{description}}
+                    data-image="{% static "assets/img/logo.png" %}"
+                    data-prefill.name={{request.user.first_name}}
+                    data-prefill.email={{request.user.email}}
+                    data-prefill.contact={{request.user.phone_number}}
+                    data-theme.color="#F37254"
+                >
+                </script>
+                <input type="hidden" custom="Hidden Element" name="hidden">
+            </form>
+
+            <!-- <form>
+            <script 
+                src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_I62ixv3PazjJS0" async
+                data-key={{razorpay_merchant_key}}
+                data-prefill.amount.amount={{razorpay_amount}}
+                data-currency={{currency}}
+                data-order_id={{razorpay_order_id}}
+                data-buttontext="Pay with Razorpay"
+                data-name="Send Money"
+                data-description={{description}}
+                data-image="{% static "assets/img/logo.png" %}"
+                data-prefill.name={{request.user.first_name}}
+                data-prefill.email={{request.user.email}}
+                data-prefill.contact={{request.user.phone_number}}
+            >                 
+            </script> 
+            </form> -->
+        </div>
+        <!-- <div class="btn complete-reg-btn">
+            <form class="form-contact contact_form" action="{% url 'paybills_send_money' %}" method="post">
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error|escape }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error|escape }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <button type='submit' class="btn complete-reg-btn">
+                    <ion-icon name="checkmark-circle-outline"></ion-icon>
+                    Pay with CCAvenue
+                </button>
+            </form>
+        </div> -->
+    </div>
+
+    <!-- * App Capsule -->
+
+    <!-- ///////////// Js Files ////////////////////  -->
+    <!-- Jquery -->
+    <script src="{% static "assets/js/lib/jquery-3.4.1.min.js" %}"></script>
+    <!-- Bootstrap-->
+    <script src="{% static "assets/js/lib/popper.min.js" %}"></script>
+    <script src="{% static "assets/js/lib/bootstrap.min.js" %}"></script>
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+    <!-- Owl Carousel -->
+    <script src="{% static "assets/js/plugins/owl-carousel/owl.carousel.min.js" %}"></script>
+    <!-- jQuery Circle Progress -->
+    <script src="{% static "assets/js/plugins/jquery-circle-progress/circle-progress.min.js" %}"></script>
+    <!-- Base Js File -->
+    <script src="{% static "assets/js/base.js" %}"></script>
+
+</body>
+</html>

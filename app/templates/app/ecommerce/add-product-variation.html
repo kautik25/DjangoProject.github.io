@@ -1,0 +1,71 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+        <div class="nk-block-head-content">
+            <h3 class="nk-block-title page-title">Add Product Variation</h3>
+        </div><!-- .nk-block-head-content -->
+        <form method="POST" action="{% url 'app:add_product_variation' %}" accept-charset="UTF-8" id="variation_add_form" class="form-horizontal">
+            {% csrf_token %}                                        
+            {% if form.errors %}                
+                <p>Please correct the following errors:</p>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error|escape }}</li>
+                    {% endfor %}
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                    <li> {{ error|escape }}</li>
+                {% endfor %}
+
+                {% for message in messages %}
+                    <li> {{ message }}</li>
+                {% endfor %}                
+            {% endif %}           
+            
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" for="{{ form.product_id.id_for_label }}">Select Product:*</label>            
+                    <div class="col-sm-7">
+                    <select class="form-control" name="{{ form.product_id.html_name }}" id="{{ form.product_id.id_for_label }}" tabindex="-1"
+                    aria-hidden="true">            
+                    <option selected="selected" value="">Please Select</option>              
+                    {% for product in product_queryset %}
+                        <option value="{{ product.id }}">{{ product.product_name }}</option>
+                    {% endfor %} 
+                    </select>
+                    </div>
+                    {{ form.product_id.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.name.id_for_label }}" class="col-sm-3 control-label">Variation Name:*</label>
+                    <div class="col-sm-7">
+                    <input class="form-control" required="" placeholder="Variation Name" type="text" name="{{ form.name.html_name }}" id="{{ form.name.id_for_label }}">
+                    {{ form.name.errors }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.value.id_for_label }}" class="col-sm-3 control-label">Variation Value:*</label>
+                    <div class="col-sm-7">
+                    <input class="form-control" required="" name="{{ form.value.html_name }}" id="{{ form.value.id_for_label }}" type="text">
+                    {{ form.value.errors }}
+                    </div>               
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary" id="add_variation_values">Save</button>
+                    </div>
+                </div>
+            </div>
+                <div id="variation_values"></div>
+            </div>
+
+            <!-- <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div> -->
+
+        </form>
+{% endblock content %}

@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+{% block extra_head %} {% endblock %}
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#000000">
+    <title>Paybills - Shop</title>
+    <meta name="description" content="Paybills - Providers">
+    <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
+    <link rel="icon" type="image/png" href="{% static "assets/img/favicon.png" %}" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/img/icon/192x192.png" %}">
+    <link rel="stylesheet" href="{% static "assets/css/style.css" %}">
+    <link rel="manifest" href="__manifest.json">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+
+{% include 'shop/navbar.html'%}
+
+<body>
+
+    <!-- loader -->
+    <div id="loader">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- * loader -->
+    
+    <!-- App Header -->
+    <div class="appHeader bg-primary scrolled">
+        <div class="left">
+            <a href="#" class="headerButton" data-toggle="modal" data-target="#sidebarPanel" style="
+            top: 20px;
+            left: 20px;">
+                <ion-icon name="menu" size="large" style="--ionicon-stroke-width: 30px;"></ion-icon>
+            </a>
+        </div>
+        <div class="pageTitle">
+            Shop
+        </div>
+        
+    </div>
+
+
+<div class="modal fade panelbox panelbox-left sidebarmodal" id="sidebarPanel" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+
+                <!-- profile box -->
+                <div class="profileBox">
+                    <div class="image-wrapper">
+                        <img src="{% static "assets/img/sample/avatar/img_avatar.png" %}" alt="image" class="imaged rounded">
+                    </div>
+                    <div class="in">
+                        <!-- <strong>Julian Gruber</strong> -->
+                        <strong>{{user.first_name}} {{user.last_name}}</strong>
+                        <div class="text-muted">
+                            ₹ 10,000
+                        </div>
+                    </div>
+                    <a href="javascript:;" class="close-sidebar-button" data-dismiss="modal">
+                        <ion-icon name="close"></ion-icon>
+                    </a>
+                </div>
+                <!-- * profile box -->
+
+
+                <ul class="listview flush transparent no-line image-listview mt-2">
+                    <li>
+                        <a href="/providers" class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="grid-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                Dashboard
+                            </div>
+                        </a>
+                    </li>
+                    <li class="accord">
+                        <ul class="listview image-listview">
+                            <li class="multi-level">
+                                <a href="#" class="item">
+                                    <div class="icon-box bg-primary">
+                                        <ion-icon name="cog"></ion-icon>
+                                    </div>
+                                    <div class="in">
+                                        <div>Services</div>
+                                    </div>
+                                </a>
+                                <!-- sub menu -->
+                                <ul class="listview image-listview">
+                                    <li>
+                                        <a href="{% url 'app:mobile_recharge' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="phone-portrait-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Mobile Prepaid
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'app:dth_recharge' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="tv-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                DTH
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'app:mobile_postpaid' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="phone-portrait-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Mobile Postpaid
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'app:landline' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="call-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Landline
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'app:electricity' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="flash-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Electricity
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'app:water' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="water-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Water
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'app:piped_gas' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="flame-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Piped GAS
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'app:fastag' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                               <ion-icon name="car-sport-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                               FastTag
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                    <a href="{% url 'app:loan_repayment' %}" class="item">
+                                        <div class="icon-box bg-info">
+                                            <ion-icon name="card-outline"></ion-icon>
+                                        </div>
+                                        <div class="in">
+                                            Loan Repayment
+                                        </div>
+                                    </a>
+                                </li>
+                                    <li>
+                                        <a href="{% url 'app:broadband' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="wifi-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Broadband
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'app:lpg_gas' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="bonfire-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                LPG GAS
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'app:insurance_payment' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="wallet-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Insurance Payment
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'app:subscription' %}" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="star-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Subscription
+                                            </div>
+                                        </a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="movie-tickets.html" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="videocam-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Movie Tickets
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="flight-tickets.html" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="airplane-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Flight Tickets
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="shop-ecommerce.html" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="cart-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Shop Ecommerce
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="fast-food-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Food
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="train-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Train Tickets
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="cash-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Donations
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="item">
+                                            <div class="icon-box bg-info">
+                                                <ion-icon name="location-outline"></ion-icon>
+                                            </div>
+                                            <div class="in">
+                                                Nearby Deals
+                                            </div>
+                                        </a>
+                                    </li>
+                                   
+                                </ul>
+                                <!-- * sub menu -->
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="wallet-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                My Wallet
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'app:setting' %}" class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="settings-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                Setting
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'app:logout' %}" class="item">
+                            <div class="icon-box bg-primary">
+                                <ion-icon name="log-out-outline"></ion-icon>
+                            </div>
+                            <div class="in">
+                                Logout
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- sidebar buttons -->
+            <div class="sidebar-buttons">
+                <div class="sidebar-logo">
+                    <img src="{% static "assets/img/logo.png" %}">
+                </div>
+            </div>
+            <!-- * sidebar buttons -->
+        </div>
+    </div>
+</div>
+<!-- * App Sidebar -->
+
+
+
+
+{% block shopdetail %}
+  
+
+
+
+{% endblock shopdetail %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="{% static "assets/js/lib/jquery-3.4.1.min.js" %}"></script>
+<!-- Bootstrap-->
+<script src="{% static "assets/js/lib/popper.min.js" %}"></script>
+<script src="{% static "assets/js/lib/bootstrap.min.js" %}"></script>
+<!-- Ionicons -->
+<script type="module" src="https://unpkg.com/ionicons@5.0.0/dist/ionicons/ionicons.js"></script>
+<!-- Owl Carousel -->
+<script src="{% static "assets/js/plugins/owl-carousel/owl.carousel.min.js" %}"></script>
+<!-- jQuery Circle Progress -->
+<script src="{% static "assets/js/plugins/jquery-circle-progress/circle-progress.min.js" %}"></script>
+<!-- Base Js File -->
+<script src="{% static "assets/js/base.js" %}"></script>
+
+
+<script>
+    setTimeout(() => {
+        notification('notification-welcome', 5000);
+    }, 2000);
+</script>
+
+{% block extra_scripts %}
+
+{% endblock extra_scripts %}

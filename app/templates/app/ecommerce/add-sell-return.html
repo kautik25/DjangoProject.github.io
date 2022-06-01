@@ -1,0 +1,238 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="nk-block-head-content">
+    <h3 class="nk-block-title page-title">Add Sell Return</h3>
+</div><!-- .nk-block-head-content -->
+        <form method="POST" action="{% url 'app:add_sell_return' %}" accept-charset="UTF-8" id="sell_return_form" novalidate="novalidate"><input name="_token" type="hidden" value="5661OVWhT1RwrzyKphZ5FWPXuVjGB8xmtqRClvbQ">
+            {% csrf_token %}
+                                        
+            {% if form.errors %}                
+                <p>Please correct the following errors:</p>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error|escape }}</li>
+                    {% endfor %}
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                    <li> {{ error|escape }}</li>
+                {% endfor %}
+
+                {% for message in messages %}
+                    <li> {{ message }}</li>
+                {% endfor %}                
+            {% endif %} 
+            <div class="box box-solid">
+                <div class="box-body">
+                    <div class="row">
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="{{ form.customer.id_for_label }}">Customer:*</label>
+                                <div class="input-group">                        
+                                    <select class="form-control" required="" name="{{ form.customer.html_name }}" id="{{ form.customer.id_for_label }}" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" value="">Please Select</option>
+                                        {% for customer in user_queryset %}
+                                            <option value="{{ customer.id }}">{{ customer.first_name }}</option>
+                                        {% endfor %}
+                                    </select>                                  
+                                    {{ form.customer.errors }}                        
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="{{ form.business_location.id_for_label }}">Business Location:*</label>
+                                <div class="input-group">                        
+                                    <select class="form-control" required="" name="{{ form.business_location.html_name }}" id="{{ form.business_location.id_for_label }}" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" value="">Please Select</option>
+                                        {% for location in location_queryset %}
+                                            <option value="{{ location.id }}">{{ location.name }}</option>
+                                        {% endfor %}
+                                    </select>                                  
+                                    {{ form.business_location.errors }}                        
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="{{ form.ref_no.id_for_label }}">Reference No:</label>
+                                <input class="form-control" name="{{ form.ref_no.html_name }}" id="{{ form.ref_no.id_for_label }}" type="text">
+                                {{ form.ref_no.errors }}
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="{{ form.purchase_date.id_for_label }}">Purchase Date:*</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input type="datetime-local" class="form-control" required="" type="text" name="{{ form.purchase_date.html_name }}" id="{{ form.purchase_date.id_for_label }}">
+                                </div>
+                                {{ form.purchase_date.errors }}
+                            </div>
+                        </div>                       
+                    </div>
+                </div>
+            </div> <!--box end-->
+
+            <div class="box box-solid"><!--box start-->
+                <div class="box-body">
+                    <!-- <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                    <input class="form-control ui-autocomplete-input" id="search_product" placeholder="Enter Product name / SKU / Scan bar code" disabled="" name="search_product" type="text" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <div class="form-group">
+                                <label for="{{ form.product.id_for_label }}">Product:*</label>
+                                <div class="input-group">                                   
+                                    <select class="form-control" required="" name="{{ form.product.html_name }}" id="{{ form.product.id_for_label }}" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" value="">Please Select</option>
+                                        {% for product in product_queryset %}
+                                            <option value="{{ product.id }}">{{ product.product_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    {{ form.product.errors }}
+                                </div>                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-bordered table-th-green text-center table-striped" id="purchase_entry_table">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">	
+                                                Product									</th>
+                                            <th class="text-center">
+                                                Quantity									</th>
+                                            <th class="text-center">
+                                                Unit Price									</th>
+                                            <th class="text-center hide">
+                                                Tax									</th>
+                                            <th class="text-center hide">
+                                                Price inc. tax									</th>
+                                            <th class="text-center">
+                                                Subtotal									</th>
+
+                                            
+                                                                                    <th class="text-center">
+                                                    EXP Date										</th>
+                                            
+                                            <th class="text-center"><i class="fa fa-trash" aria-hidden="true"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <hr>
+                            <div class="pull-right col-md-5">
+                                <table class="pull-right col-md-12">
+                                    <tbody><tr class="hide">
+                                        <th class="col-md-7 text-right">Total Before Tax:</th>
+                                        <td class="col-md-5 text-left">
+                                            <span id="total_st_before_tax" class="display_currency">0.00</span>
+                                            <input type="hidden" id="st_before_tax_input" value="0">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-md-7 text-right">Net Total Amount:</th>
+                                        <td class="col-md-5 text-left">
+                                            <span id="price_total" class="display_currency">0.00</span>
+                                            <!-- This is total before purchase tax-->
+                                            <input type="hidden" id="total_subtotal_input" value="0.00" name="total_before_tax">
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </div>
+
+                            <input type="hidden" id="row_count" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div><!--box end-->
+            <div class="box box-solid"><!--box start-->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        <table class="table">
+                            <tbody><tr>
+                                <td class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="{{ form.discount_type.id_for_label }}">Discount Type:</label>
+                                        <select class="form-control" name="{{ form.discount_type.html_name }}" id="{{ form.discount_type.id_for_label }}" tabindex="-1" aria-hidden="true">
+                                            <option value="" selected="selected">Please Select</option>
+                                            {% for x,y in form.fields.discount_type.choices %}                                                                
+                                                <option value="{{ x }}">{{ y }}</option>
+                                            {% endfor %}
+                                        </select> 
+                                        {{ form.discount_type.errors }}                                       
+                                    </div>
+                                </td>
+                                <td class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="{{ form.discount_amount.id_for_label }}">Discount Amount:</label>
+                                        <input class="form-control input_number" required="" type="text" value="0" name="{{ form.discount_amount.html_name }}" id="{{ form.discount_amount.id_for_label }}">
+                                        {{ form.discount_amount.errors }} 
+                                    </div>
+                                </td>
+                                <td class="col-md-3">
+                                    &nbsp;
+                                </td>
+                                <!-- <td class="col-md-3">
+                                    <b>Discount:</b>(-) 
+                                    <span id="total_discount" class="display_currency">0.00</span>
+                                </td> -->
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <label for="{{ form.total_credit_amount.id_for_label }}">Total Credit Amount:</label>
+                                    <input name="{{ form.total_credit_amount.html_name }}" id="{{ form.total_credit_amount.id_for_label }}" type="text" value="0.00">
+                                    {{ forms.total_credit_amount.errors }}                                    
+                                    <!-- <b>Total Credit Amount: </b> -->
+                                    <!-- <span id="total_payable" class="display_currency" data-currency_symbol="true">0.00 $</span> -->
+                                </td>                                
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="form-group">
+                                        <label for="{{ form.additional_notes.id_for_label }}">Additional Notes</label>
+                                        <textarea class="form-control" rows="3" cols="50" name="{{ form.additional_notes.html_name }}" id="{{ form.additional_notes.id_for_label }}"></textarea>
+                                        {{ form.additional_notes.errors }}
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody></table>
+                        </div>
+                </div>
+
+                <div class="row">
+                <div class="col-sm-12">
+                    <button type="submit" id="submit_sell_return_form" class="btn btn-primary pull-right btn-flat">Save</button>
+                </div>
+                </div>
+            </div><!--box end-->
+        </div></form>
+{% endblock content %}

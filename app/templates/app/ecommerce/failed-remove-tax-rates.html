@@ -1,0 +1,9 @@
+{% extends "common/base.html" %}
+{% load static %}
+            
+{% block content %}
+<form action="{% url 'app:merchant_dashboard' %}" method="get"> 
+    <p>Failed to delete the selected tax rate. It is in use by another object.</p>       
+        <input type="submit" class="btn btn-primary" value="Close">
+    </form>
+{% endblock content %}

@@ -1,0 +1,67 @@
+{% extends "common/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="nk-block-head-content">
+	<h3 class="nk-block-title page-title">Add Units</h3>    
+</div>
+
+<form method="POST" action="{% url 'app:add_units' %}" accept-charset="UTF-8" id="unit_add_form">
+
+  {% csrf_token %}
+                                            
+    {% if form.errors %}                
+      <p>Please correct the following errors:</p>
+      {% for field in form %}
+        {% for error in field.errors %}
+          <li>{{ error|escape }}</li>
+        {% endfor %}
+      {% endfor %}
+
+      {% for error in form.non_field_errors %}
+        <li> {{ error|escape }}</li>
+      {% endfor %}
+
+      {% for message in messages %}
+        <li> {{ message }}</li>
+      {% endfor %}                
+    {% endif %}
+
+    <div class="modal-body">
+
+      <div class="form-group">
+        <label for="{{ form.name.id_for_label }}">Name:*</label>
+        <input class="form-control" required="" placeholder="Name" name="{{ form.name.html_name }}" id="{{ form.name.id_for_label }}" type="text">
+        {{ form.name.errors }}
+      </div> 
+
+      <div class="form-group">
+        <label for="{{ form.short_name.id_for_label }}">Short name:*</label>
+        <input class="form-control" required="" placeholder="Short Name" name="{{ form.short_name.html_name }}" id="{{ form.short_name.id_for_label }}" type="text">
+        {{ form.short_name.errors }}
+      </div> 
+
+      <div class="form-group">
+        <label for="{{ form.allow_decimal.id_for_label }}">Allow decimal:*</label>
+        <select class="form-control" required="" name="{{ form.allow_decimal.html_name }}" id="{{ form.allow_decimal.id_for_label }}"
+          tabindex="-1" aria-hidden="true">
+          <option selected value="">Please Select</option>
+          {% for x,y in form.fields.allow_decimal.choices %}                                                                
+            <option value="{{ x }}">{{ y }}</option>
+          {% endfor %}                            
+        </select>
+            {{ form.allow_decimal.errors }}
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+
+    </form>
+
+{% endblock content %}

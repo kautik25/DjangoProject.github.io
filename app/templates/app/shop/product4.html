@@ -1,0 +1,128 @@
+{% extends 'shop/index.html' %}
+
+{% comment %} {% include 'shop/header.html' %} {% endcomment %}
+{% block shopdetail %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'ecomm/style.css' %} ">
+
+</head>
+<body>
+    <div class="container" style="margin-left: 150px; margin-right: 150px; margin-top: 150px;">
+       <div class="wrapper" style="height:700px; margin-top:50px;">
+          <div class="product-box">
+              <div class="all-images">
+             <div class="small-images">
+                 <img src="{{ object.product_image.url }} " onclick="clickimg(this)">
+                 <img src="{{ object.product_image2.url }}" onclick="clickimg(this)">
+                 <img src="{{ object.product_image3.url }}" onclick="clickimg(this)">
+                 <img src="{{ object.product_image4.url }}" onclick="clickimg(this)">
+             </div>
+             <div class="main-images">
+                 <img src="{{ object.product_image.url }}" id="imagebox" >
+             </div>
+            </div>
+          </div>
+          <div class="text">
+              <div class="content">
+                  <p class="brand">Brand : {{object.product_brand}}</p>
+                  <h2>{{object.product_name}}</h2>
+                  <div class="review">
+                      <span>(4.8)</span>
+                      <span class="fa fa-star"></span>
+                  </div>
+                  <div class="price-box">
+                      <p class="price">&#8377; {{object.product_price}}</p>
+                      <strike>&#8377; {{object.product_price|add:"499"}}</strike>
+                  </div>
+
+                  <p>Color : <select name="color">
+                    <option value="Choose an option">Choose an option</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                    <option value="white">White</option>
+                    <option value="black">Black</option>
+                </select></p>
+
+                <div class="counter">
+                    <span class="down" onClick='decreaseCount(event, this)'>-</span>
+                    <input type="text" value="1">
+                    <span class="up" onClick='increaseCount(event, this)'>+</span>
+                  </div>
+                <button>
+                    <span class="fa fa-shopping-cart"></span>
+                    Add to Cart 
+                </button> 
+
+                    {% comment %} 
+                <a href="{{ object.get_add_to_cart_url }}" class="btn btn-primary" style="margin: 2px;">Add to
+                    Cart</a>
+                <a href="{{object.get_remove_from_cart_url}}" class="btn btn-outline-dark"
+                    style="margin: 2px;">Remove from Cart</a> 
+                
+                    {% endcomment %}
+
+                    
+                <button class="buy" onclick="location.href='{% url 'app:order-summary' %}'">
+                   <span class="fa fa-shopping-cart"></span>
+                   Buy Now
+                </button>
+              </div>
+              <div class="others"> 
+              <p>Main Category : {{object.product_category}}</p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <p>Sub Category : {{object.product_subcategory}}</p>
+              </div>
+
+              <div class="about1" style="width: 500px; overflow-wrap: break-word;">
+                  <p>About Product</p>
+                  <p1>{{object.product_description}}</p1>                 
+              </div>
+          </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+        function clickimg(smallImg){
+            var fullImg = document.getElementById("imagebox")
+            fullImg.src = smallImg.src
+        }
+
+        function increaseCount(a, b) {
+        var input = b.previousElementSibling;
+        var value = parseInt(input.value, 10);
+        value = isNaN(value) ? 0 : value;
+        value++;
+        input.value = value;
+        }
+
+        function decreaseCount(a, b) {
+        var input = b.nextElementSibling;
+        var value = parseInt(input.value, 10);
+        if (value > 1) {
+        value = isNaN(value) ? 0 : value;
+        value--;
+        input.value = value;
+        }
+        }
+    </script>
+</body>
+</html>
+
+{% endblock %}

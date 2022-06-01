@@ -1,0 +1,548 @@
+{% extends "common/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="nk-block-head-content">
+    <h3 class="nk-block-title page-title">Add Purchases</h3>    
+</div>
+
+        <form method="POST" action="{% url 'app:add_purchase' %}" accept-charset="UTF-8" id="add_forms.purchase_form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% if forms.purchase_form.errors %}                
+            <p>Please correct the following errors:</p>
+            {% for field in forms.purchase_form %}
+                {% for error in field.errors %}
+                    <li>{{ error|escape }}</li>
+                {% endfor %}
+            {% endfor %}
+
+            {% for error in forms.purchase_form.non_field_errors %}
+                <li> {{ error|escape }}</li>
+            {% endfor %}
+
+            {% for message in messages %}
+                <li> {{ message }}</li>
+            {% endfor %}                
+        {% endif %}
+                                        
+            {% if forms.payment_form.errors %}                
+                <p>Please correct the following errors:</p>
+                {% for field in forms.payment_form %}
+                    {% for error in field.errors %}
+                        <li>{{ error|escape }}</li>
+                    {% endfor %}
+                {% endfor %}
+
+                {% for error in forms.payment_form.non_field_errors %}
+                    <li> {{ error|escape }}</li>
+                {% endfor %}
+
+                {% for message in messages %}
+                    <li> {{ message }}</li>
+                {% endfor %}                
+            {% endif %} 
+
+            <div class="box box-solid">
+                <div class="box-body">
+                    <div class="row">                        
+                        
+                        <div class=" col-sm-4 ">
+                            <div class="form-group">
+                                <label for="{{ forms.purchase_form.supplier.id_for_label }}">Supplier:*</label>
+                                <div class="input-group">
+                                    
+                                    <select class="form-control" required="" name="{{ forms.purchase_form.supplier.html_name }}" id="{{ forms.purchase_form.supplier.id_for_label }}" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" value="">Please Select</option>
+                                        {% for supplier in supplier_queryset %}
+                                            <option value="{{ supplier.id }}">{{ supplier.business_name }}</option>
+                                        {% endfor %}
+                                    </select>                                  
+                                    {{ forms.purchase_form.supplier.errors }}
+                                </div>                                
+                            </div>
+                        </div>
+                        <div class=" col-sm-4 ">
+                            <div class="form-group">
+                                <label for="{{ forms.purchase_form.ref_no.id_for_label }}">Reference No:</label>
+                                <input class="form-control" name="{{ forms.purchase_form.ref_no.html_name }}" id="{{ forms.purchase_form.ref_no.id_for_label }}" type="text">
+                                {{ forms.purchase_form.ref_no.errors }}
+                            </div>
+                        </div>
+                        <div class=" col-sm-4 ">
+                            <div class="form-group">
+                                <label for="{{ forms.purchase_form.purchase_date.id_for_label }}">Purchase Date:*</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input  required="" type="datetime-local" class="form-control" name="{{ forms.purchase_form.purchase_date.html_name }}" id="{{ forms.purchase_form.purchase_date.id_for_label }}">
+                                </div>                               
+                                
+                                {{ forms.purchase_form.purchase_date.errors }}
+                            </div>
+                        </div>
+                        <div class="col-sm-3  hide ">
+                            <div class="form-group">
+                                <label for="{{ forms.purchase_form.purchase_status.id_for_label }}">Purchase Status:*</label> <i class="fa fa-info-circle text-info hover-q " aria-hidden="true" data-container="body" data-toggle="popover" data-placement="top" data-content="Products in this purchase will be available for sale only if the <b>Order Status</b> is <b>Items Received</b>." data-html="true" data-trigger="hover"></i>						
+                                <select class="form-control" required="" name="{{ forms.purchase_form.purchase_status.html_name }}" id="{{ forms.purchase_form.purchase_status.id_for_label }}" tabindex="-1" aria-hidden="true">
+                                    <option value="">Please Select</option>                                                                                                     -->
+                                    {% for x,y in forms.purchase_form.fields.purchase_status.choices %}
+                                        <option value="{{ x }}">{{ y }}</option>
+                                    {% endfor %}
+                                </select>
+                                {{ forms.purchase_form.purchase_status.errors }}
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <!-- <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="location_id">Business Location:*</label>
+                                <i class="fa fa-info-circle text-info hover-q " aria-hidden="true" data-container="body" data-toggle="popover" data-placement="top" data-content="Business location where the purchased product will be available for sale." data-html="true" data-trigger="hover"></i>						<select class="form-control select2 select2-hidden-accessible" required="" id="location_id" name="location_id" tabindex="-1" aria-hidden="true"><option selected="selected" value="">Please Select</option><option value="1">POS</option><option value="7">Banquet</option></select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 278px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-location_id-container"><span class="select2-selection__rendered" id="select2-location_id-container" title="Please Select">Please Select</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                            </div>
+                        </div> -->
+
+                        <!-- Currency Exchange Rate -->
+                        <!-- <div class="col-sm-3  hide ">
+                            <div class="form-group">
+                                <label for="exchange_rate">Currency Exchange Rate:*</label>
+                                <i class="fa fa-info-circle text-info hover-q " aria-hidden="true" data-container="body" data-toggle="popover" data-placement="top" data-content="1 Purchase Currency = ? Base Currency <br> <small class='text-muted'>You can enable/disabled 'Purchase in other currency' from business settings.</small>" data-html="true" data-trigger="hover"></i>						<div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-info"></i>
+                                    </span>
+                                    <input class="form-control" required="" step="0.001" name="exchange_rate" type="number" value="1" id="exchange_rate">
+                                </div>
+                                <span class="help-block text-danger">
+                                    Purchase currency is set to <strong> Dollars </strong>						</span>
+                            </div>
+                        </div> -->
+
+                        <!-- <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="document">Attach Document:</label>
+                                <div class="file-input file-input-new">
+                                    <div class="kv-upload-progress hide">
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%;">
+                                                0%
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group file-caption-main">
+                                        <div tabindex="500" class="form-control file-caption  kv-fileinput-caption">
+                                            <div class="file-caption-name">
+                                            </div>
+                                        </div>
+
+                                        <div class="input-group-btn">
+                                            <button type="button" tabindex="500" title="Clear selected files" class="btn btn-default fileinput-remove fileinput-remove-button"><i class="glyphicon glyphicon-trash"></i>  <span class="hidden-xs">Remove</span></button>
+                                            <button type="button" tabindex="500" title="Abort ongoing upload" class="btn btn-default hide fileinput-cancel fileinput-cancel-button"><i class="glyphicon glyphicon-ban-circle"></i>  <span class="hidden-xs">Cancel</span></button>
+                                            
+                                            <div tabindex="500" class="btn btn-primary btn-file"><i class="glyphicon glyphicon-folder-open"></i>&nbsp;  <span class="hidden-xs">Browse..</span><input id="upload_document" name="document" type="file"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="help-block">Max File size: 1MB</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div> <!--box end-->
+            <div class="box box-solid"><!--box start-->
+                <div class="box-body">
+                    <div class="row">
+                        <!-- <div class="col-sm-8 col-sm-offset-2">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                    <input class="form-control mousetrap ui-autocomplete-input" id="search_product" placeholder="Enter Product name / SKU / Scan bar code" autofocus="" name="search_product" type="text" autocomplete="off">
+                                </div>
+                            </div>
+                        </div> -->
+                        <div class=" col-sm-4 ">
+                            <div class="form-group">
+                                <label for="{{ forms.purchase_form.product.id_for_label }}">Product:*</label>
+                                <div class="input-group">                                   
+                                    <select class="form-control" required="" name="{{ forms.purchase_form.product.html_name }}" id="{{ forms.purchase_form.product.id_for_label }}" tabindex="-1" aria-hidden="true">
+                                        <option selected="selected" value="">Please Select</option>
+                                        {% for product in product_queryset %}
+                                            <option value="{{ product.id }}">{{ product.product_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    {{ forms.purchase_form.product.errors }}
+                                </div>                                
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <!-- <div class="form-group">
+                                <button tabindex="-1" type="button" class="btn btn-link btn-modal" data-href="https://ekomasu.in/products/quick_add" data-container=".quick_add_product_modal"><i class="fa fa-plus"></i> Add new product </button>
+                            </div> -->
+                            <div class="form-group">
+                                <a href="{% url 'app:add_product' %}" class="btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Add Product</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="table-responsive">
+                                <table class="table table-condensed table-bordered table-th-green text-center table-striped" id="purchase_entry_table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Product Name</th>
+                                            <th>Purchase Quantity</th>
+                                            <th>Unit Cost (Before Discount)</th>
+                                            <th>Discount Percent</th>
+                                            <th>Unit Cost (Before Tax)</th>
+                                            <th class="hide">Subtotal (Before Tax)</th>
+                                            <th class="hide">Product Tax</th>
+                                            <th class="hide">Net Cost</th>
+                                            <th>Line Total</th>
+                                            <th class=" hide ">
+                                                Profit Margin %									</th>
+                                            <th>
+                                                Unit Selling Price									</th>
+                                                                                                                        <th>
+                                                    MFG Date / EXP Date										</th>
+                                                                                <th><i class="fa fa-trash" aria-hidden="true"></i></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <hr>
+                            <div class="pull-right col-md-5">
+                                <table class="pull-right col-md-12">
+                                    <tbody><tr class="hide">
+                                        <th class="col-md-7 text-right">Total Before Tax:</th>
+                                        <td class="col-md-5 text-left">
+                                            <span id="total_st_before_tax" class="display_currency">0.00</span>
+                                            <input type="hidden" id="st_before_tax_input" value="0">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="col-md-7 text-right">Net Total Amount:</th>
+                                        <td class="col-md-5 text-left">
+                                            <span id="total_subtotal" class="display_currency">0.00</span>
+                                            <!-- This is total before purchase tax-->
+                                            <input type="hidden" id="total_subtotal_input" value="0" name="total_before_tax">
+                                        </td>
+                                    </tr>
+                                </tbody></table>
+                            </div>
+
+                            <input type="hidden" id="row_count" value="0">
+                        </div>
+                    </div>
+                </div>
+            </div><!--box end-->
+            <div class="box box-solid"><!--box start-->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                        <table class="table">
+                            <tbody><tr>
+                                <td class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="{{ forms.purchase_form.quantity.id_for_label }}">Purchase quantity:</label>
+                                        <input class="form-control input_number" required="" type="text" value="1" name="{{ forms.purchase_form.quantity.html_name }}" id="{{ forms.purchase_form.quantity.id_for_label }}">
+                                        {{ forms.purchase_form.quantity.errors }} 
+                                    </div>
+                                </td>
+                                <td class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="{{ forms.purchase_form.discount_type.id_for_label }}">Discount Type:</label>
+                                        <select class="form-control" name="{{ forms.purchase_form.discount_type.html_name }}" id="{{ forms.purchase_form.discount_type.id_for_label }}" tabindex="-1" aria-hidden="true">
+                                            <option value="" selected="selected">Please Select</option>
+                                            {% for x,y in forms.purchase_form.fields.discount_type.choices %}                                                                
+                                                <option value="{{ x }}">{{ y }}</option>
+                                            {% endfor %}
+                                        </select> 
+                                        {{ forms.purchase_form.discount_type.errors }}                                       
+                                    </div>
+                                </td>
+                                <td class="col-md-3">
+                                    <div class="form-group">
+                                        <label for="{{ forms.purchase_form.discount_amount.id_for_label }}">Discount Amount:</label>
+                                        <input class="form-control input_number" required="" type="text" value="0" name="{{ forms.purchase_form.discount_amount.html_name }}" id="{{ forms.purchase_form.discount_amount.id_for_label }}">
+                                        {{ forms.purchase_form.discount_amount.errors }} 
+                                    </div>
+                                </td>
+                                <td class="col-md-3">
+                                    &nbsp;
+                                </td>
+                                <!-- <td class="col-md-3">
+                                    <b>Discount:</b>(-) 
+                                    <span id="discount_calculated_amount" class="display_currency">0.00</span>
+                                </td> -->
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                    <label for="tax_id">Purchase Tax:</label>
+                                    <select name="tax_id" id="tax_id" class="form-control select2 select2-hidden-accessible" placeholder="'Please Select'" tabindex="-1" aria-hidden="true">
+                                        <option value="" data-tax_amount="0" data-tax_type="fixed" selected="">None</option>
+                                                                            <option value="1" data-tax_amount="2" data-tax_type="">sddfd</option>
+                                                                            <option value="2" data-tax_amount="2" data-tax_type="">s</option>
+                                                                            <option value="3" data-tax_amount="2" data-tax_type="">assdfddfd</option>
+                                                                    </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 284px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-tax_id-container"><span class="select2-selection__rendered" id="select2-tax_id-container" title="None">None</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                    <input id="tax_amount" name="tax_amount" type="hidden" value="0">
+                                    </div>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <!-- <td>
+                                    <b>Purchase Tax:</b>(+) 
+                                    <span id="tax_calculated_amount" class="display_currency">0.00</span>
+                                </td> -->
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="{{ forms.purchase_form.shipping_details.id_for_label }}">Shipping Details:</label>
+                                        <input class="form-control" type="text" name="{{ forms.purchase_form.shipping_details.html_name }}" id="{{ forms.purchase_form.shipping_details.id_for_label }}">
+                                        {{ forms.purchase_form.shipping_details.errors }}
+                                    </div>
+                                </td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="{{ forms.purchase_form.shipping_charges.id_for_label }}">(+) Additional Shipping charges:</label>
+                                        <input class="form-control input_number" required="" type="text" value="0" name="{{ forms.purchase_form.shipping_charges.html_name }}" id="{{ forms.purchase_form.shipping_charges.id_for_label }}">
+                                        {{ forms.purchase_form.shipping_charges.errors }}
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="{{ forms.purchase_form.total_purchase_price.id_for_label }}">Purchase Total:</label>
+                                        <input class="form-control input_number" required="" type="text" value="0" name="{{ forms.purchase_form.total_purchase_price.html_name }}" id="{{ forms.purchase_form.total_purchase_price.id_for_label }}">
+                                        {{ forms.purchase_form.total_purchase_price.errors }}
+                                    </div>
+
+                                    <!-- <input id="grand_total_hidden" name="final_total" type="hidden" value="0">
+                                    <b>Purchase Total: </b>
+                                    <span id="grand_total" class="display_currency" data-currency_symbol="true">0.00 </span>
+                                    {{ form.total_purchase_price.errors }} -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <div class="form-group">
+                                        <label for="{{ forms.purchase_form.additional_notes.id_for_label }}">Additional Notes</label>
+                                        <textarea class="form-control" rows="3" cols="50" name="{{ forms.purchase_form.additional_notes.html_name }}" id="{{ forms.purchase_form.additional_notes.id_for_label }}"></textarea>
+                                        {{ forms.purchase_form.additional_notes.errors }}
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody></table>
+                        </div>
+                </div>
+            </div>
+            </div>
+            <!--box end-->
+            <div class="box box-solid"><!--box start-->
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Add payment			</h3>
+                </div>
+                <div class="box-body payment_row">
+                    <div class="row">
+            <input type="hidden" class="payment_row_index" value="0">           
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.payer.id_for_label }}">Payer:*</label>
+                    <div class="input-group">                        
+                        <select class="form-control" required="" name="{{ forms.payment_form.payer.html_name }}" id="{{ forms.payment_form.payer.id_for_label }}" tabindex="-1" aria-hidden="true">
+                            <option selected="selected" value="">Please Select</option>
+                            {% for payer in user_queryset %}
+                                <option value="{{ payer.id }}">{{ payer.first_name }}</option>
+                            {% endfor %}
+                        </select>                                  
+                        {{ forms.payment_form.payer.errors }}                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.recipient.id_for_label }}">Recipient:*</label>
+                    <div class="input-group">                        
+                        <select class="form-control" required="" name="{{ forms.payment_form.recipient.html_name }}" id="{{ forms.payment_form.recipient.id_for_label }}" tabindex="-1" aria-hidden="true">
+                            <option selected="selected" value="">Please Select</option>
+                            {% for recipient in user_queryset %}
+                                <option value="{{ recipient.id }}">{{ recipient.first_name }}</option>
+                            {% endfor %}
+                        </select>                                  
+                        {{ forms.payment_form.recipient.errors }}                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.payment_amount.id_for_label }}">Payment Amount:*</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i class="fa fa-money"></i>
+                        </span>
+                        <input class="form-control payment-amount input_number" name="{{ forms.payment_form.payment_amount.html_name }}" id="{{ forms.payment_form.payment_amount.id_for_label }}" required="" placeholder="Amount" type="text" value="0.00">
+                        {{ forms.payment_form.payment_amount.errors }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.payment_method.id_for_label }}">Payment Method:*</label>
+                    <div class="input-group">                        
+                        <select class="form-control col-md-12 payment_types_dropdown" required="" name="{{ forms.payment_form.payment_method.html_name }}" id="{{ forms.payment_form.payment_method.id_for_label }}" style="width:100%;">                            
+                            <option value="">Please Select</option>                                                                                                     
+                            {% for x,y in forms.payment_form.fields.payment_method.choices %}
+                                <option value="{{ x }}">{{ y }}</option>
+                            {% endfor %}
+                        </select>
+                        {{ forms.payment_form.payment_method.errors }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.payment_status.id_for_label }}">Payment status:*</label>
+                    <div class="input-group">                        
+                        <select class="form-control col-md-12 payment_types_dropdown" required="" name="{{ forms.payment_form.payment_status.html_name }}" id="{{ forms.payment_form.payment_status.id_for_label }}" style="width:100%;">
+                            <option value="">Please Select</option>                                                                                                     
+                            {% for x,y in forms.payment_form.fields.payment_status.choices %}
+                                <option value="{{ x }}">{{ y }}</option>
+                            {% endfor %}
+                        </select>
+                        {{ forms.payment_form.payment_status.errors }}
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+                <div class="payment_details_div  hide " data-type="card">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.card_number.id_for_label }}">Card Number</label>
+                    <input class="form-control" placeholder="Card Number" name="{{ forms.payment_form.card_number.html_name }}" id="{{ forms.payment_form.card_number.id_for_label }}" type="text" value="">
+                    {{ forms.payment_form.card_number.errors }}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.card_holder_name.id_for_label }}">Card Holder Name</label>
+                    <input class="form-control" placeholder="Card Holder Name" name="{{ forms.payment_form.card_holder_name.html_name }}" id="{{ forms.payment_form.card_holder_name.id_for_label }}" type="text" value="">
+                    {{ forms.payment_form.card_holder_name.errors }}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.card_transaction_number.id_for_label }}">Card Transaction No.</label>
+                    <input class="form-control" placeholder="Card Transaction No." name="{{ forms.payment_form.card_transaction_number.html_name }}" id="{{ forms.payment_form.card_transaction_number.id_for_label }}" type="text" value="">
+                    {{ forms.payment_form.card_transaction_number.errors }}
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.card_type.id_for_label }}">Card Type</label>
+                    <select class="form-control" name="{{ forms.payment_form.card_type.html_name }}" id="{{ forms.payment_form.card_type.id_for_label }}"><option value="visa">Visa</option><option value="master">MasterCard</option></select>
+                    {{ forms.payment_form.card_type.errors }}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.card_month.id_for_label }}">Month</label>
+                    <input class="form-control" placeholder="Month" name="{{ forms.payment_form.card_month.html_name }}" id="{{ forms.payment_form.card_month.id_for_label }}" type="text" value="">
+                    {{ forms.payment_form.card_month.errors }}
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.card_year.id_for_label }}">Year</label>
+                    <input class="form-control" placeholder="Year" name="{{ forms.payment_form.card_year.html_name }}" id="{{ forms.payment_form.card_year.id_for_label }}" type="text" value="">
+                    {{ forms.payment_form.card_year.errors }}
+                </div>
+            </div>
+            <!-- <div class="col-md-3">
+                <div class="form-group">
+                    <label for="card_security_0">Security Code</label>
+                    <input class="form-control" placeholder="Security Code" id="card_security_0" name="payment[0][card_security]" type="text" value="">
+                </div>
+            </div> -->
+            <div class="clearfix"></div>
+        </div>
+        <div class="payment_details_div  hide " data-type="cheque">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.cheque_number.id_for_label }}">Cheque No.</label>
+                    <input class="form-control" placeholder="Cheque No." name="{{ forms.payment_form.cheque_number.html_name }}" id="{{ forms.payment_form.cheque_number.id_for_label }}" type="text" value="">
+                    {{ forms.payment_form.cheque_number.errors }}
+                </div>
+            </div>
+        </div>
+        <div class="payment_details_div  hide " data-type="bank_transfer">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.bank_account_number.id_for_label }}">Bank Account No</label>
+                    <input class="form-control" placeholder="Bank Account No" name="{{ forms.payment_form.bank_account_number.html_name }}" id="{{ forms.payment_form.bank_account_number.id_for_label }}" type="text" value="">
+                    {{ forms.payment_form.bank_account_number.errors }}
+                </div>
+            </div>
+        </div>
+        <div class="payment_details_div  hide " data-type="custom_pay_1">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.payment_ref_no.id_for_label }}">Transaction No.</label>
+                    <input class="form-control" placeholder="Transaction No." name="{{ forms.payment_form.payment_ref_no.html_name }}" id="{{ forms.payment_form.payment_ref_no.id_for_label }}" type="text" value="">
+                    {{ forms.payment_form.payment_ref_no.errors }}
+                </div>
+            </div>
+        </div>           	
+        <div class="col-md-12">
+                <div class="form-group">
+                    <label for="{{ forms.payment_form.payment_note.id_for_label }}">Payment note:</label>
+                    <textarea class="form-control" rows="3" name="{{ forms.payment_form.payment_note.html_name }}" id="{{ forms.payment_form.payment_note.id_for_label }}" cols="50"></textarea>
+                    {{ forms.payment_form.payment_note.errors }}
+                </div>
+            </div>
+        </div>			
+        <hr>
+        <!-- <div class="row">
+            <div class="col-sm-12">
+                <div class="pull-right"><strong>Payment due:</strong> <span id="payment_due">0.00</span></div>
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="{{ forms.purchase_form.payment_due.id_for_label }}">Payment due:</label>
+                    <input class="form-control input_number" required="" type="text" value="0" name="{{ forms.purchase_form.payment_due.html_name }}" id="{{ forms.purchase_form.payment_due.id_for_label }}">
+                    {{ forms.purchase_form.payment_due.errors }} 
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <button type="submit" id="submit_forms.purchase_form" class="btn btn-primary pull-right btn-flat">Save</button>
+            </div>
+        </div>
+        </div>
+        </div>
+        </form>
+
+
+{% endblock content %}
